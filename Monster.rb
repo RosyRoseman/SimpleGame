@@ -4,8 +4,7 @@ class Monster
   def initialize
     @HP = 3
     @WepDmg = 1
-    @monster_species = get_species
-    @current_monster = @monster_species
+    @current_monster = get_species
     puts "Initialized Monster"
   end
 
@@ -15,10 +14,6 @@ class Monster
 
   def TakeDmg(amountDmg)
     @HP -= amountDmg
-  end
-
-  def get_monster_species
-    @monster_species
   end
 
   def get_current_monster
