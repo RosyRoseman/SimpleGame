@@ -4,6 +4,7 @@ attr_accessor :name
     puts "You find a #{@name}!"
     #Add item to inventory
   end
+
   def name
     @name
   end
@@ -11,7 +12,7 @@ end
 
 class Potion < Item
 
-  def drink
+  def self.drink
     puts "You drink the #{@name}."
     give_player_effect
   end
@@ -34,12 +35,12 @@ class HealthPotion < Potion
     puts "Do you want to drink this?"
     action = gets.chomp.to_sym
     next unless action != :yes || :no
-    if action == :yes then Potion.drink else puts "Health Potion added to your inventory." end
+    if action == :yes then HealthPotion.drink else puts "Health Potion added to your inventory." end
       break
     end
   end
 
-  def give_player_effect
+  def self.give_player_effect
     $player.HealDmg(10)
     #remove from inventory
   end

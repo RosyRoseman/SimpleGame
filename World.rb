@@ -25,6 +25,7 @@ class Room
   attr_accessor :size, :content, :adjetive, :content_name
 
   def initialize
+    puts "before content"
     @content           = get_content
     @content_name      = content_name
     @room_size         = get_size
@@ -41,7 +42,7 @@ class Room
   end
   private
   def get_content
-    [Monster, Item].sample.new
+    [Monster, HealthPotion].sample.new
   end
 
   def content_name

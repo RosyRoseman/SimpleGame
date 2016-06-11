@@ -21,7 +21,7 @@ class Game
 
   def  get_input(actions)
     while true
-      puts ">>"
+      print ">>"
       input = gets.chomp.to_sym
       next unless actions.include? input
       return input
@@ -30,7 +30,7 @@ class Game
 
   def  self.get_input(actions)
     while true
-      puts ">>"
+      print ">>"
       input = gets.chomp.to_sym
       next unless actions.include? input
       return input
@@ -41,11 +41,12 @@ class Game
 ################################################
   def start_game
       @story.introduction
-      @content            = HealthPotion.new
+      @content            = "Nothing Yet"
     while $player.alive?
       @current_room       = @world.get_room_of($player)
       @content            = @room.content
       @content_name       = @content.name
+      @monster            = @room.content
       input = get_input(ACTIONS)
       take_action(input)
     end
