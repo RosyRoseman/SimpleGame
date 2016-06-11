@@ -52,6 +52,9 @@ class Game
 ##############################################
 
   def print_status
+    @current_room                  = $dungeon.get_room_of($player)
+    @room                          = $dungeon_room_list[@current_room-1]
+    @room_is                       = @room.get_room_is
     puts "You are in room number #{@room_is[:room_number]}."
     puts "You are in a #{@room_is[:adjetive]} room, that is roughly #{@room_is[:size]}."
     puts "Inside you find a #{(@room_is[:content]).name}! Oh Shit!"
