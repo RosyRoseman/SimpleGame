@@ -46,8 +46,8 @@ class Room
 
   def initialize
     puts "Creating Room..."
-    @room_is           = {size: get_size, adjetive: get_adjetive, type: room_type,
-                          content: get_content, room_number: get_room_number}
+    @room_is           = {size: get_size, adjetive: get_adjetive, type: get_room_type,
+                          content: get_content, room_number: get_new_room_number}
     puts "New room created"
   end
 
@@ -56,6 +56,11 @@ class Room
   end
 
   private
+
+  def get_new_room_number
+    $dungeon_room_list.length
+  end
+
   def get_content
     [Monster, HealthPotion].sample.new
   end
@@ -71,7 +76,7 @@ class Room
      "oppressive"].sample
   end
 
-  def room_type
+  def get_room_type
     "room type"
   end
 
