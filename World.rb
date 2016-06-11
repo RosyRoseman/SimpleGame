@@ -40,7 +40,7 @@ class Room
   end
   private
   def get_content
-    ["nothing yet"]
+    Monster.new
   end
 
   def get_size
