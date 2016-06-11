@@ -5,16 +5,13 @@ require './Item'
 require './Story'
 
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :yes, :no]
+  ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :help]
 
   def initialize
     @world              = World.new
     $player             = Player.new
     @room               = Room.new
     @story              = Story.new
-    @room_size          = @room.get_room_size
-    @room_adjetive      = @room.get_room_adjetive
-    @current_room       = @world.get_room_of($player)
     puts 'Game Start'
     start_game
   end
@@ -22,7 +19,7 @@ class Game
   def  get_input(actions)
     while true
       print ">>"
-      input = gets.chomp.to_sym
+      input = gets.chomp.downcase.to_sym
       next unless actions.include? input
       return input
     end
@@ -31,7 +28,7 @@ class Game
   def  self.get_input(actions)
     while true
       print ">>"
-      input = gets.chomp.to_sym
+      input = gets.chomp.downcase.to_sym
       next unless actions.include? input
       return input
     end
@@ -46,7 +43,6 @@ class Game
       @current_room       = @world.get_room_of($player)
       @content            = @room.content
       @content_name       = @content.name
-      @monster            = @room.content
       input = get_input(ACTIONS)
       take_action(input)
     end
@@ -68,7 +64,6 @@ class Game
       @room_size          = @room.get_room_size
       @room_adjetive      = @room.get_room_adjetive
       @content            = @room.content
-      @monster            = @room.content
       print_status
     when :backward
       @world.player_backward
@@ -77,10 +72,18 @@ class Game
     when :status
       $player.print_player_status
     when :attack
-      @monster.combat($player)
+      if @content.instance_of? Monster
+        @content.combat($player)
+      elsif @content.instance_of? Item
+        puts "You want to attack a #{@name}? I think not."
+      else
+        puts "Error: Content is neither monster nor item."
+      end
     when :quit
       exit
     end
+    when :help
+      @story.help
   end
 end
 

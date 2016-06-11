@@ -1,30 +1,21 @@
+require './Combatable.rb'
+
 class Player
-  attr_accessor :HP, :WepDmg
+  include Combatable
+  attr_accessor
 
   def initialize
-    @HP               = 10
-    @WepDmg           = 1
+    initialize_stats({maxHP: 25, WepDmg: 1})
 
     puts 'Player Initialized'
-  end
-
-  def alive?
-    @HP > 0
-  end
-
-  def TakeDmg(amountDmg)
-    @HP -= amountDmg
-  end
-
-  def HealDmg(amountHeal)
-    @HP += amountHeal
   end
 
   def print_player_status
     puts "*" * 80
     puts "HP: #{@HP}/10"
+    puts "Your 'weapon' deals #{@WepDmg} damage."
     puts "*" * 80
   end
-  
+
 
 end

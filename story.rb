@@ -11,6 +11,7 @@ class Story
       puts "Wanna go in?"
       input = Game.get_input([:yes, :no])
         if input == :yes
+          puts "Remember to type Help if you ever dont know what to do!"
           break
         else
           puts "Well alright then, no treasure for you!"
@@ -18,4 +19,9 @@ class Story
         end
       end
   end
+
+  def help
+    puts "Type look, forward, backward, attack, loot, or inventory"
+  end
+  
 end

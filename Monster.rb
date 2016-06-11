@@ -1,24 +1,14 @@
+require "./Combatable"
+
 class Monster
-  attr_accessor :HP, :WepDmg, :Type, :monster_species, :Name
+  include Combatable
+  attr_accessor :Type, :monster_species, :Name
 
   def initialize
-    @HP = 3
-    @WepDmg = 1
+    initialize_stats({maxHP: 10, WepDmg: 1})
     @current_monster = get_species
     @name = @current_monster
     puts "Initialized Monster"
-  end
-
-  def alive?
-    @HP > 0
-  end
-
-  def TakeDmg(amountDmg)
-    @HP -= amountDmg
-  end
-
-  def HealDmg(amountHeal)
-    @HP += amountHeal
   end
 
   def get_current_monster

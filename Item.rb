@@ -1,5 +1,6 @@
 class Item
 attr_accessor :name
+
   def loot
     puts "You find a #{@name}!"
     #Add item to inventory
@@ -13,12 +14,12 @@ end
 class Potion < Item
 
   def self.drink
-    puts "You drink the #{@name}."
+    puts "You drink the #{self.name}."
     give_player_effect
   end
 
   def throw
-    puts "You throw the #{@name} at your target."
+    puts "You throw the #{self.name} at your target."
     give_monster_effect
   end
 end
@@ -26,6 +27,7 @@ end
 class HealthPotion < Potion
 
   def initialize
+    puts "HealthPot Created."
     @name = "Health Potion"
     ask_to_drink
   end
@@ -33,9 +35,12 @@ class HealthPotion < Potion
   def ask_to_drink
     while true
     puts "Do you want to drink this?"
-    action = gets.chomp.to_sym
-    next unless action != :yes || :no
-    if action == :yes then HealthPotion.drink else puts "Health Potion added to your inventory." end
+    input = Game.get_input([:yes, :no])
+      if input == :yes
+         HealthPotion.drink
+      elsif input == :no
+        puts "Health Potion added to your inventory."
+      end
       break
     end
   end
