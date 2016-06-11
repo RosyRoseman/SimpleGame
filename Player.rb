@@ -1,4 +1,4 @@
-require './Combatable.rb'
+require './Combatable'
 
 class Player
   include Combatable

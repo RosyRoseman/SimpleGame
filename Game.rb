@@ -4,6 +4,7 @@ require './Monster'
 require './Item'
 require './Story'
 require './Randomize'
+require './Combat'
 
 class Game
   ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :help]
@@ -78,7 +79,8 @@ class Game
       $player.print_player_status
     when :attack
       if (@room_is[:content]).instance_of? Monster
-         (@room_is[:content]).combat($player)
+         combat = Combat.new
+         combat.fight_monster(@room_is[:content])
       elsif (@room_is[:content]).instance_of? Item
         puts "You want to attack a #{@name}? I think not."
       else
