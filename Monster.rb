@@ -21,12 +21,14 @@ class Monster
 
   def combat(player)
       if alive?
-        puts "You hit the monster for #{player.WepDmg}"
-        TakeDmg(Roll.damage(player.WepDmg))
+        damage = Roll.damage(player.WepDmg)
+        puts "You hit the monster for #{damage}"
+        TakeDmg(damage)
         puts "It's at #{@HP} HP."
           if alive?
-            player.TakeDmg(@WepDmg)
-            puts "The monster hits back for #{@WepDmg} points of damage."
+            damage = Roll.damage(@WepDmg)
+            player.TakeDmg(damage)
+            puts "The monster hits back for #{damage} points of damage."
           else
             puts "He's dead Jim, or whatever your name is."
           end
