@@ -2,6 +2,7 @@ require './World'
 require './Player'
 require './Monster'
 require './Item'
+require './Story'
 
 class Game
   ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :yes, :no]
@@ -10,11 +11,11 @@ class Game
     @world              = World.new
     $player             = Player.new
     @room               = Room.new
+    @story              = Story.new
     @room_size          = @room.get_room_size
     @room_adjetive      = @room.get_room_adjetive
     @current_room       = @world.get_room_of($player)
     puts 'Game Start'
-    print_status
     start_game
   end
 
@@ -27,10 +28,19 @@ class Game
     end
   end
 
+  def  self.get_input(actions)
+    while true
+      puts ">>"
+      input = gets.chomp.to_sym
+      next unless actions.include? input
+      return input
+    end
+  end
 
   private
 ################################################
   def start_game
+      @story.introduction
       @content            = HealthPotion.new
     while $player.alive?
       @current_room       = @world.get_room_of($player)
