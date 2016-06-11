@@ -3,6 +3,7 @@ require './Player'
 require './Monster'
 require './Item'
 require './Story'
+require './Randomize'
 
 class Game
   ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :help]
