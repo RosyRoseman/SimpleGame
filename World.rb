@@ -1,8 +1,25 @@
 class World
 
   def initialize
-    @current_room = 0
     puts 'World Initialized'
+  end
+
+end
+
+#######################################################
+class Dungeon
+
+  def initialize
+    @current_room = 0
+    puts "Dungeon Initialized."
+    puts "Set player flag to 'in dungeon'"
+    enter_dungeon
+    $dungeon_room_list  = [Room.new]
+  end
+
+  def enter_dungeon
+    set_current_room_to(1)
+    puts "You are standing at the entrance of the dungeon"
   end
 
   def player_forward
@@ -17,28 +34,26 @@ class World
     @current_room
   end
 
+  def set_current_room_to(room_number)
+    @current_room = room_number
+  end
+
 end
 
-#####################################################
-
+######################################################
 class Room
-  attr_accessor :size, :content, :adjetive, :content_name
+  attr_accessor :size, :content, :adjetive, :content_name, :room_is, :room_number
 
   def initialize
     puts "Creating Room..."
     @content           = get_content
     @content_name      = @content.name
-    @room_size         = get_size
-    @room_adjetive     = get_adjetive
+    @room_is           = {size: get_size, adjetive: get_adjetive, special_room: special_room?}
     puts "New room created"
   end
 
-  def get_room_size
-    @room_size
-  end
-
-  def get_room_adjetive
-    @room_adjetive
+  def get_room_is
+    @room_is
   end
 
   private
@@ -57,7 +72,9 @@ class Room
      "oppressive"].sample
   end
 
-
+  def special_room?
+    FALSE
+  end
 
 
 end

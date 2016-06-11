@@ -8,10 +8,9 @@ class Game
   ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :help]
 
   def initialize
-    @world              = World.new
-    $player             = Player.new
-    @room               = Room.new
-    @story              = Story.new
+    @world                          = World.new
+    $player                         = Player.new
+    @story                          = Story.new
     puts 'Game Start'
     start_game
   end
@@ -38,35 +37,42 @@ class Game
 ################################################
   def start_game
       @story.introduction
-      @content            = "Nothing Yet"
+      @content                       = "Nothing Yet"
+      @room                          = $dungeon_room_list.first
     while $player.alive?
-      @current_room       = @world.get_room_of($player)
-      @content            = @room.content
-      @content_name       = @content.name
+      @current_room                  = $dungeon.get_room_of($player)
+      @room                          = $dungeon_room_list[@current_room - 1]
+      @content                       = @room.content
+      @content_name                  = @content.name
+      @room_is                       = @room.get_room_is
       input = get_input(ACTIONS)
       take_action(input)
     end
     puts "Game Over Wah Wah Wa~uh"
+    exit
   end
 ##############################################
 
   def print_status
     puts "You are in room number #{@current_room}."
-    puts "You are in a #{@room_adjetive} room, that is roughly #{@room_size}."
+    puts "You are in a #{@room_is[:adjetive]} room, that is roughly #{@room_is[:size]}."
     puts "Inside you find a #{@content_name}! Oh Shit!"
   end
 
   def take_action(action)
     case action
     when :forward
-      @world.player_forward
-      @room               = Room.new
-      @room_size          = @room.get_room_size
-      @room_adjetive      = @room.get_room_adjetive
-      @content            = @room.content
+      $dungeon.player_forward
+      $dungeon_room_list            << Room.new
+      @room                         = $dungeon_room_list[@current_room - 1]
+      @room_is                      = @room.get_room_is
+      @content                      = @room.content
+      @content_name                 = @content.name
+      @current_room                 = $dungeon.get_room_of($player)
       print_status
     when :backward
-      @world.player_backward
+      $dungeon.player_backward
+      @room                         = $dungeon_room_list[@current_room - 1]
     when :look
       print_status
     when :status
@@ -81,9 +87,9 @@ class Game
       end
     when :quit
       exit
-    end
     when :help
       @story.help
+    end
   end
 end
 

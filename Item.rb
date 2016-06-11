@@ -29,7 +29,6 @@ class HealthPotion < Potion
   def initialize
     puts "HealthPot Created."
     @name = "Health Potion"
-    ask_to_drink
   end
 
   def ask_to_drink
