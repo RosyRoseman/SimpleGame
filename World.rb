@@ -42,13 +42,12 @@ end
 
 ######################################################
 class Room
-  attr_accessor :size, :content, :adjetive, :content_name, :room_is, :room_number
+  attr_accessor :room_is
 
   def initialize
     puts "Creating Room..."
-    @content           = get_content
-    @content_name      = @content.name
-    @room_is           = {size: get_size, adjetive: get_adjetive, special_room: special_room?}
+    @room_is           = {size: get_size, adjetive: get_adjetive, type: get_room_type,
+                          content: get_content, room_number: get_new_room_number}
     puts "New room created"
   end
 
@@ -57,6 +56,11 @@ class Room
   end
 
   private
+
+  def get_new_room_number
+    $dungeon_room_list.length
+  end
+
   def get_content
     [Monster, HealthPotion].sample.new
   end
@@ -72,8 +76,8 @@ class Room
      "oppressive"].sample
   end
 
-  def special_room?
-    FALSE
+  def get_room_type
+    "room type"
   end
 
 
