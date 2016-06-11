@@ -1,4 +1,4 @@
-require './Combatable'
+require './Combat'
 
 class Player
   include Combatable

@@ -7,8 +7,12 @@ class Combat
 
   def fight_monster(monster)
     @monster                            = monster
-    player_hits
-    if @monster.alive? then monster_hits end
+    if @monster.alive?
+       monster_hits
+       player_hits
+     else
+       puts "The monster in this room is already dead..."
+    end
     while @monster.alive?
       input = Game.get_input(COMBAT_ACTIONS)
       case input
@@ -21,8 +25,6 @@ class Combat
           else
             puts "He's dead jim."
           end
-        else
-          puts "The monster in this room is already dead..."
         end
       when :run
         puts "This feature hasn't been implimented yet..."
@@ -51,5 +53,35 @@ class Combat
   end
 end
 ############################################################
+module Combatable
+
+  def Combatable.included(mod)
+    attr_accessor :HP, :WepDmg
+  end
+
+  def initialize_stats(stats)
+    @stats = stats
+
+    @HP               = stats[:maxHP]
+    @WepDmg           = stats[:WepDmg]
+  end
+
+  def alive?
+    @HP > 0
+  end
+
+  def hp
+    @HP
+  end
+
+  def TakeDmg(amount)
+    @HP -= amount
+  end
+
+  def HealDmg(amount)
+    @HP += amount
+    @HP = [@HP, @stats[:maxHP]].min
+  end
+end
 
 ##########################################################

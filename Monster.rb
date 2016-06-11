@@ -1,4 +1,4 @@
-require './Combatable'
+require './Combat'
 
 class Monster
   include Combatable
