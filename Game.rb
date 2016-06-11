@@ -3,6 +3,7 @@ require './Player'
 require './Monster'
 require './Item'
 require './Story'
+require './Randomize'
 
 class Game
   ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :help]
@@ -36,14 +37,12 @@ class Game
   private
 ################################################
   def start_game
+      $dungeon_room_list             = Array.new
       @story.introduction
-      @content                       = "Nothing Yet"
       @room                          = $dungeon_room_list.first
     while $player.alive?
       @current_room                  = $dungeon.get_room_of($player)
-      @room                          = $dungeon_room_list[@current_room - 1]
-      @content                       = @room.content
-      @content_name                  = @content.name
+      @room                          = $dungeon_room_list[@current_room-1]
       @room_is                       = @room.get_room_is
       input = get_input(ACTIONS)
       take_action(input)
@@ -54,33 +53,34 @@ class Game
 ##############################################
 
   def print_status
-    puts "You are in room number #{@current_room}."
+    @current_room                  = $dungeon.get_room_of($player)
+    @room                          = $dungeon_room_list[@current_room-1]
+    @room_is                       = @room.get_room_is
+    puts "You are in room number #{@room_is[:room_number]}."
     puts "You are in a #{@room_is[:adjetive]} room, that is roughly #{@room_is[:size]}."
-    puts "Inside you find a #{@content_name}! Oh Shit!"
+#    puts "Inside you find a #{(@room_is[:content]).name}! Oh Shit!"
+    puts " #{@room_is[:content]}"
   end
 
   def take_action(action)
     case action
     when :forward
+      if @room == $dungeon_room_list.last
+        $dungeon_room_list          << Room.new
+      end
       $dungeon.player_forward
-      $dungeon_room_list            << Room.new
-      @room                         = $dungeon_room_list[@current_room - 1]
-      @room_is                      = @room.get_room_is
-      @content                      = @room.content
-      @content_name                 = @content.name
-      @current_room                 = $dungeon.get_room_of($player)
       print_status
     when :backward
       $dungeon.player_backward
-      @room                         = $dungeon_room_list[@current_room - 1]
+      @room                         = $dungeon_room_list[@current_room-1]
     when :look
       print_status
     when :status
       $player.print_player_status
     when :attack
-      if @content.instance_of? Monster
-        @content.combat($player)
-      elsif @content.instance_of? Item
+      if (@room_is[:content]).instance_of? Monster
+         (@room_is[:content]).combat($player)
+      elsif (@room_is[:content]).instance_of? Item
         puts "You want to attack a #{@name}? I think not."
       else
         puts "Error: Content is neither monster nor item."

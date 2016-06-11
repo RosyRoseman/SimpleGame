@@ -5,7 +5,7 @@ class Monster
   attr_accessor :Type, :monster_species, :Name
 
   def initialize
-    initialize_stats({maxHP: 10, WepDmg: 1})
+    initialize_stats({maxHP: 10, WepDmg: [1,2]})
     @current_monster = get_species
     @name = @current_monster
     puts "Initialized Monster"
@@ -22,7 +22,7 @@ class Monster
   def combat(player)
       if alive?
         puts "You hit the monster for #{player.WepDmg}"
-        TakeDmg(player.WepDmg)
+        TakeDmg(Roll.damage(player.WepDmg))
         puts "It's at #{@HP} HP."
           if alive?
             player.TakeDmg(@WepDmg)

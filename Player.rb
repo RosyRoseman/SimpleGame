@@ -5,7 +5,7 @@ class Player
   attr_accessor
 
   def initialize
-    initialize_stats({maxHP: 25, WepDmg: 1})
+    initialize_stats({maxHP: 25, WepDmg: [1,6]})
 
     puts 'Player Initialized'
   end
