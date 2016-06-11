@@ -1,6 +1,5 @@
 module Combatable
 
-
   def Combatable.included(mod)
     attr_accessor :HP, :WepDmg
   end
@@ -14,6 +13,10 @@ module Combatable
 
   def alive?
     @HP > 0
+  end
+
+  def hp
+    @HP
   end
 
   def TakeDmg(amount)

@@ -1,4 +1,4 @@
-require "./Combatable"
+require './Combatable'
 
 class Monster
   include Combatable
@@ -19,23 +19,6 @@ class Monster
     @name
   end
 
-  def combat(player)
-      if alive?
-        damage = Roll.damage(player.WepDmg)
-        puts "You hit the monster for #{damage}"
-        TakeDmg(damage)
-        puts "It's at #{@HP} HP."
-          if alive?
-            damage = Roll.damage(@WepDmg)
-            player.TakeDmg(damage)
-            puts "The monster hits back for #{damage} points of damage."
-          else
-            puts "He's dead Jim, or whatever your name is."
-          end
-      else
-        puts "The monster is already dead..."
-      end
-  end
   private
   def get_species
     ["Frog Lizard", "Lizard Frog",
