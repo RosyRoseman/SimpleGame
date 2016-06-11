@@ -22,10 +22,11 @@ end
 #####################################################
 
 class Room
-  attr_accessor :size, :content, :adjetive
+  attr_accessor :size, :content, :adjetive, :content_name
 
   def initialize
     @content           = get_content
+    @content_name      = content_name
     @room_size         = get_size
     @room_adjetive     = get_adjetive
     puts "New room created"
@@ -40,7 +41,11 @@ class Room
   end
   private
   def get_content
-    Monster.new
+    [Monster, Item].sample.new
+  end
+
+  def content_name
+    @content.name
   end
 
   def get_size

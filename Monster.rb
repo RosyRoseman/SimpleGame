@@ -1,10 +1,11 @@
 class Monster
-  attr_accessor :HP, :WepDmg, :Type, :monster_species
+  attr_accessor :HP, :WepDmg, :Type, :monster_species, :Name
 
   def initialize
     @HP = 3
     @WepDmg = 1
     @current_monster = get_species
+    @name = @current_monster
     puts "Initialized Monster"
   end
 
@@ -16,8 +17,16 @@ class Monster
     @HP -= amountDmg
   end
 
+  def HealDmg(amountHeal)
+    @HP += amountHeal
+  end
+
   def get_current_monster
     @current_monster
+  end
+
+  def name
+    @name
   end
 
   def combat(player)
