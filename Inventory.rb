@@ -8,7 +8,7 @@ class Inventory
     if item.class.ancestors.include? Item
        thing = item.class.name.to_sym
        if $inventory.include?(thing)
-          $inventory.(thing) + 1
+          $inventory[thing] += 1
        else
           $inventory[thing] = 1
        end

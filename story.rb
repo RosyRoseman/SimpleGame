@@ -18,8 +18,8 @@ class Story
           puts "Well alright then, no treasure for you!"
           exit
         else
-          puts "Try again."
-          puts "#{input}"
+          puts "Error: invalid entry, seriously, what the hell did you type?"
+          puts "You entered: #{input}"
           sleep(1)
         end
       end
