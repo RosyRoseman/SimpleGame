@@ -22,19 +22,11 @@ class Parser
      print ">>"
      input = gets.chomp.tr(" ", "_").to_sym
      unless options.include? input
-     unless PERM_OPT.include? input
-       puts "That command wont work here..."
+       unless PERM_OPT.include? input
+         puts "That command wont work here..."
+       end
      end
-     end
-     case input
-     when :quit
-       exit
-     when :game_info
-       puts "#{Story.game_info}"
-     when :help
-       puts "The game is looking for one of these commands right now: #{options}"
-       puts "If this doesn't help, try our wiki! 'wiki wiki wak'..."
-     end
+     breakout_commands(input)
    end
    return input
  end
@@ -48,19 +40,11 @@ class Parser
       input = gets.chomp.downcase.tr(" ", "_").to_sym
       parse = sort(input)
       unless options.include? parse
-      unless PERM_OPT.include? parse
-        puts "That command wont work here..."
+        unless PERM_OPT.include? parse
+          puts "That command wont work here..."
+        end
       end
-      end
-      case parse
-      when :quit
-        exit
-      when :game_info
-        puts "#{Story.game_info}"
-      when :help
-        puts "The game is looking for one of these commands right now: #{options}"
-        puts "If this doesn't help, try our wiki! 'wiki wiki wak'..."
-      end
+      breakout_commands(parse)
     end
     return @parse
   end
@@ -75,6 +59,16 @@ class Parser
     @parse
   end
 
-
+  def self.breakout_commands(input)
+    case input
+    when :quit
+      exit
+    when :game_info
+      puts "#{Story.game_info}"
+    when :help
+      puts "The game is looking for one of these commands right now: #{options}"
+      puts "If this doesn't help, try our wiki! 'wiki wiki wak'..."
+    end
+  end
 
 end
