@@ -14,7 +14,7 @@ class Combat
        puts "The monster in this room is already dead..."
     end
     while @monster.alive?
-      input = Game.get_input(COMBAT_ACTIONS)
+      input = Parser.get_input(COMBAT_ACTIONS)
       case input
       when :attack
         if $player.alive?

@@ -5,6 +5,7 @@ require './Item'
 require './Story'
 require './Randomize'
 require './Combat'
+require './Parser'
 
 class Game
   ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :help]
@@ -17,24 +18,6 @@ class Game
     start_game
   end
 
-  def  get_input(actions)
-    while true
-      print ">>"
-      input = gets.chomp.downcase.to_sym
-      next unless actions.include? input
-      return input
-    end
-  end
-
-  def  self.get_input(actions)
-    while true
-      print ">>"
-      input = gets.chomp.downcase.to_sym
-      next unless actions.include? input
-      return input
-    end
-  end
-
   private
 ################################################
   def start_game
@@ -45,7 +28,7 @@ class Game
       @current_room                  = $dungeon.get_room_of($player)
       @room                          = $dungeon_room_list[@current_room-1]
       @room_is                       = @room.get_room_is
-      input = get_input(ACTIONS)
+      input = Parser.get_input(ACTIONS)
       take_action(input)
     end
     puts "Game Over Wah Wah Wa~uh"
