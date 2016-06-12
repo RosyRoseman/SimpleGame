@@ -16,6 +16,31 @@ class Parser
   ALL             = [YES, NO, GAME_INFO, HELP, QUIT, BACKWARD, FORWARD, USE_ITEM,
                     STATUS, RUN, ATTACK, LOOK, INVENTORY]
 
+ def self.get_specific(options)
+   input = :nil
+   until options.include? input
+     print ">>"
+     input = gets.chomp.tr(" ", "_").to_sym
+     unless options.include? input
+     unless PERM_OPT.include? input
+       puts "That command wont work here..."
+     end
+     end
+     case input
+     when :quit
+       exit
+     when :game_info
+       puts "#{Story.game_info}"
+     when :help
+       puts "The game is looking for one of these commands right now: #{options}"
+       puts "If this doesn't help, try our wiki! 'wiki wiki wak'..."
+     end
+   end
+   return input
+ end
+
+
+
   def  self.get_input(options)
     parse = :nil
     until options.include? parse

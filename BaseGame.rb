@@ -1,7 +1,7 @@
 require './Dependencies'
 
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory]
+  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item]
 
   def initialize
     @world                          = World.new
@@ -71,6 +71,11 @@ class Game
       end
     when :inventory
       print_inventory
+    when :use_item
+      puts "What would you like to use?"
+      puts "needs to be one of #{$inventory.keys}"
+      input = Parser.get_specific($inventory.keys)
+      puts "was #{input} "
     end
   end
 end

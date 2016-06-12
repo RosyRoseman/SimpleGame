@@ -1,7 +1,7 @@
 class Inventory
 
   def initialize
-  $inventory = {Bludgeon: 1}
+  $inventory = {bludgeon: 1}
   end
 
   def self.add(item)
