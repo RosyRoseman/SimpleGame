@@ -27,21 +27,25 @@ end
 class HealthPotion < Potion
 
   def initialize
+    found_potion
     puts "HealthPot Created."
     @name = "Health Potion"
+
   end
 
-  def ask_to_drink
-    while true
+  def found_potion
     puts "Do you want to drink this?"
-    input = Game.get_input([:yes, :no])
+    input = Parser.get_input([:yes, :no])
       if input == :yes
          HealthPotion.drink
       elsif input == :no
+        Inventory.add(self)
         puts "Health Potion added to your inventory."
       end
-      break
-    end
+  end
+
+  def self.call_new
+    HealthPotion.new
   end
 
   def self.give_player_effect

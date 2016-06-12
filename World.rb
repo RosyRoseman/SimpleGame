@@ -70,7 +70,7 @@ class Room
   end
 
   def get_content
-    [Monster, HealthPotion].sample.new
+    [Monster, HealthPotion].sample.call_new
   end
 
   def get_size

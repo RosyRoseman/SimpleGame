@@ -1,7 +1,7 @@
 require './Dependencies'
 
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack]
+  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory]
 
   def initialize
     @world                          = World.new
@@ -38,6 +38,13 @@ class Game
     puts "Inside you find a #{(@room_is[:content]).name}! Oh Shit!"
   end
 
+  def print_inventory
+    $inventory.each {|pair| puts "#{pair.last} || #{pair.first.to_s}"}
+    puts " "
+    puts "*" * 80
+    puts "#{$inventory.count} items."
+  end
+
   def take_action(action)
     case action
     when :forward
@@ -62,6 +69,8 @@ class Game
       else
         puts "Error: Content is neither monster nor item."
       end
+    when :inventory
+      print_inventory
     end
   end
 end

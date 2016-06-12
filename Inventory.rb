@@ -1,0 +1,25 @@
+class Inventory
+
+  def initialize
+  $inventory = {Bludgeon: 1}
+  end
+
+  def self.add(item)
+    if item.class.ancestors.include? Item
+       thing = item.class.name.to_sym
+       if $inventory.include?(thing)
+          $inventory.(thing) + 1
+       else
+          $inventory[thing] = 1
+       end
+     else
+       puts "#{item.class}"
+    end
+  end
+
+
+
+
+
+
+end

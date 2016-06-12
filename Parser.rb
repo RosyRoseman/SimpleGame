@@ -1,5 +1,6 @@
 class Parser
   PERM_OPT        = [:quit, :help, :game_info]
+  INVENTORY       = [:inventory, :i]
   LOOK            = [:look, :l, :loo, :ook, :look_around]
   ATTACK          = [:attack, :a, :attack, :atack, :attac, :attak, :atac, :atak]
   RUN             = [:run, :r, :ru, :un]
@@ -13,7 +14,7 @@ class Parser
   YES             = [:yes, :y, :ye, :es, :yeah]
   NO              = [:no, :n,]
   ALL             = [YES, NO, GAME_INFO, HELP, QUIT, BACKWARD, FORWARD, USE_ITEM,
-                    STATUS, RUN, ATTACK, LOOK]
+                    STATUS, RUN, ATTACK, LOOK, INVENTORY]
 
   def  self.get_input(options)
     parse = :nil
