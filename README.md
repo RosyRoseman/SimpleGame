@@ -11,6 +11,8 @@ Text based dungeon crawler started as practice for Ruby.
 - Expand room content randomizer
 - Better find item prompt
 - Reduce 'world initialized' messages
+- Character creation, name and the like.
+- Death message
 - ASCII art?
 - More detailed room descriptors
 - Fork dungeon? left, right, etc.
