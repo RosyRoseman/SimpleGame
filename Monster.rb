@@ -6,6 +6,7 @@ class Monster
 
   def initialize
     initialize_stats({maxHP: 10, WepDmg: [1,2]})
+#    @monster_is = {:species \\\, :level \\\, :stats \\\, :type \\\, :loot \\\}
     @current_monster = get_species
     @name = @current_monster
     puts "Initialized Monster"

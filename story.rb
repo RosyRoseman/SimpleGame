@@ -1,13 +1,13 @@
 class Story
 
-  def introduction
-      puts "You stand at the entrance to a dungeon."
+  def self.introduction
+#      puts "You stand at the entrance to a dungeon."
 #      sleep(2)
-      puts "Inside are monsters."
+#      puts "Inside are monsters."
 #      sleep(2)
-      puts "Scary monsters."
+#      puts "Scary monsters."
 #      sleep(2)
-      puts "Wanna go in?"
+      puts "Wanna go get started?"
       while true
       input = Parser.get_input([:yes, :no])
         if input == :yes
@@ -23,10 +23,6 @@ class Story
           sleep(1)
         end
       end
-  end
-
-  def help
-    puts "Type look, forward, backward, attack, loot, or inventory"
   end
 
 end

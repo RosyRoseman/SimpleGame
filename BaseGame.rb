@@ -1,19 +1,11 @@
-require './World'
-require './Player'
-require './Monster'
-require './Item'
-require './Story'
-require './Randomize'
-require './Combat'
-require './Parser'
+require './Dependencies'
 
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack, :quit, :help]
+  ACTIONS = [:forward, :backward, :look, :status, :attack]
 
   def initialize
     @world                          = World.new
     $player                         = Player.new
-    @story                          = Story.new
     puts 'Game Start'
     start_game
   end
@@ -22,8 +14,9 @@ class Game
 ################################################
   def start_game
       $dungeon_room_list             = Array.new
-      @story.introduction
+      Story.introduction
       @room                          = $dungeon_room_list.first
+###############GAME LOOP########################
     while $player.alive?
       @current_room                  = $dungeon.get_room_of($player)
       @room                          = $dungeon_room_list[@current_room-1]
@@ -69,10 +62,6 @@ class Game
       else
         puts "Error: Content is neither monster nor item."
       end
-    when :quit
-      exit
-    when :help
-      @story.help
     end
   end
 end

@@ -10,7 +10,6 @@ end
 class Dungeon
 
   def initialize
-    @current_room = 0
     puts "Dungeon Initialized."
     puts "Set player flag to 'in dungeon'"
     enter_dungeon
@@ -18,8 +17,17 @@ class Dungeon
   end
 
   def enter_dungeon
-    set_current_room_to(1)
     puts "You are standing at the entrance of the dungeon"
+    sleep(1)
+    puts "Would you like to go inside?"
+    input = Parser.get_input([:yes, :no])
+    if input == :yes
+      set_current_room_to(1)
+      puts "You step inside the entrance."
+    else
+      set_current_room_to(0)
+      puts "You decide its best not, and head back from whence you came."
+    end
   end
 
   def player_forward
