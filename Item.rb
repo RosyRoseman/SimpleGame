@@ -13,8 +13,8 @@ end
 
 class Potion < Item
 
-  def self.drink
-    puts "You drink the #{self.name}."
+  def drink(potion_name)
+    puts "You drink the #{potion_name}."
     give_player_effect
   end
 
@@ -28,7 +28,6 @@ class HealthPotion < Potion
 
   def initialize
     found_potion
-    puts "HealthPot Created."
     @name = "Health Potion"
 
   end
@@ -37,7 +36,7 @@ class HealthPotion < Potion
     puts "Do you want to drink this?"
     input = Parser.get_input([:yes, :no])
       if input == :yes
-         HealthPotion.drink
+         self.drink(self.class.name)
       elsif input == :no
         Inventory.add(self)
         puts "Health Potion added to your inventory."
@@ -48,7 +47,7 @@ class HealthPotion < Potion
     HealthPotion.new
   end
 
-  def self.give_player_effect
+  def give_player_effect
     $player.HealDmg(10)
     #remove from inventory
   end

@@ -18,7 +18,6 @@ class Dungeon
 
   def enter_dungeon
     puts "You are standing at the entrance of the dungeon"
-    sleep(1)
     puts "Would you like to go inside?"
     input = Parser.get_input([:yes, :no])
     if input == :yes
