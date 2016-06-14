@@ -20,7 +20,8 @@ Text based dungeon crawler started as practice for Ruby.
 - Add traps.
 - Add currency
 - Add shop
-- Add NPCs 
+- Add NPCs
 - Add Classes
 - Add Magic
 - Add Saves
+- Add tetanus/poison attributes for weapon, monster, combat
