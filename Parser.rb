@@ -12,7 +12,7 @@ class Parser
   QUIT            = [:quit, :exit, :esc, :end, :q]
   HELP            = [:help, :h]
   GAME_INFO       = [:game_info, :info, :gi]
-  YES             = [:yes, :y, :ye, :es, :yeah]
+  YES             = [:yes, :y, :ye, :es, :yeah, :yeha]
   NO              = [:no, :n,]
   ALL             = [YES, NO, GAME_INFO, HELP, QUIT, BACKWARD, FORWARD, USE_ITEM,
                     STATUS, RUN, ATTACK, LOOK, INVENTORY, TAKE]
@@ -73,5 +73,3 @@ class Parser
   end
 
 end
-
-warblgarblarblar
