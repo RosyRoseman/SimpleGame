@@ -84,11 +84,11 @@ class Game
       input = Parser.get_specific($inventory.keys)
       puts "was #{input} "
     when :take
-      case @room_is[:content]
+      case @room_is[:content][0]
       when Potion; @room_is[:content].found
       when Garbage; puts "You really don't need to pick that up."
       when Monster; puts "Yeah, maybe kill it first, before you try and put it in your pocket..."
-      when Array; "You turn over the corpse and rustle around in its pockets for #{@room_is[:content][2]}"
+      when :dead_monster; puts "You turn over the corpse and rustle around in its pockets for #{@room_is[:content][2][0]}"
       else puts "This is wrong, tell the developers that you tried to pick up a #{@room_is[:content]}"
       end
     end
