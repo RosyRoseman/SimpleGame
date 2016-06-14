@@ -48,11 +48,16 @@ class Game
   def take_action(action)
     case action
     when :forward
-      if @room == $dungeon_room_list.last
-        $dungeon_room_list          << Room.new
+      if @room_is[:content] && Monster === @room_is[:content] && @room_is[:content].alive?
+        puts "You can't seem to get around the #{(@room_is[:content]).name}"
+        break
+      else
+        if @room == $dungeon_room_list.last
+          $dungeon_room_list          << Room.new
+        end
+        $dungeon.player_forward
+        print_status
       end
-      $dungeon.player_forward
-      print_status
     when :backward
       $dungeon.player_backward
       @room                         = $dungeon_room_list[@current_room-1]
