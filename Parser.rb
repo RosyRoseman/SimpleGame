@@ -73,5 +73,3 @@ class Parser
   end
 
 end
-
-warblgarblarblar
