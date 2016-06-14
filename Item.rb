@@ -1,3 +1,5 @@
+require './Potions'
+require './Weapons'
 class Item
 attr_accessor :name
 
@@ -9,19 +11,23 @@ attr_accessor :name
     Random.item
   end
 end
-###########################################
-class Potion < Item
+#########################################
+module Equipable
 
-  def drink(potion_name)
-    puts "You drink the #{potion_name}."
-    give_effect($player)
-  end
-
+end
+module Throwable
   def throw(target)
     puts "You throw the #{self.name} at your target."
     give_effect(target)
   end
-
+end
+###########################################
+class Potion < Item
+include Throwable
+  def drink(potion_name)
+    puts "You drink the #{potion_name}."
+    give_effect($player)
+  end
   def found
     puts "Do you want to drink this?"
     input = Parser.get_input([:yes, :no])
@@ -34,26 +40,13 @@ class Potion < Item
 
 end
 ###################################################
-class HealthPotion < Potion
-  def initialize
-    @name = "Health Potion"
-  end
-  def give_effect(target)
-    target.HealDmg(10)
-    #remove from inventory
-  end
-end
-#######################################################
-class FirePotion < Potion
-  def initialize
-    @name = "Potion of Liquid Fire"
-  end
-  def give_effect(target)
-    target.TakeDmg(10)
-  end
-end
-###############################################
 
+###############################################
+class Weapon < Item
+include Equipable
+
+end
+#####################################################
 class Garbage < Item
   TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup"]
   def initialize
