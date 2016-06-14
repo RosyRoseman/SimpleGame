@@ -9,6 +9,10 @@ attr_accessor :name
     Random.item
   end
 end
+#########################################
+module Equipable
+
+end
 ###########################################
 class Potion < Item
 
@@ -53,7 +57,13 @@ class FirePotion < Potion
   end
 end
 ###############################################
+class Weapon < Item
+include Equipable
 
+
+
+end
+#####################################################
 class Garbage < Item
   TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup"]
   def initialize
