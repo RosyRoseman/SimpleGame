@@ -16,7 +16,12 @@ attr_accessor :name, :weight, :damage
 end
 #########################################
 module Equipable
-
+  def equip
+    Inventory.equip(self)
+  end
+  def unequip
+    Inventory.unequip(self)
+  end
 end
 module Throwable
   def throw(target)
@@ -40,7 +45,12 @@ include Throwable
         Inventory.add(self)
       end
   end
-
+  def use(target)
+    puts "Would you like to throw this or drink it?"
+    input = Parser.get_specific([:drink, :throw])
+    if input == :drink; self.drink(self.name)
+    elsif input == :throw; self.throw(target) end
+  end
 end
 require './Potions'
 ###################################################

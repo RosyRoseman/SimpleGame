@@ -10,6 +10,11 @@ class Monster
     $dungeon_room_list[($dungeon.get_room_of($player))-1].clear(self.name, Roll.gold(self.loot))#<<For the death flavor text.
 #    $player.gain_xp(2)#*monster level
   end
+  def hits(target)
+    damage = Roll.damage(self.WepDmg)
+    puts "The monster hits you for #{damage} points of damage."
+    target.TakeDmg(damage)
+  end
 end
 
 

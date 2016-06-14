@@ -16,15 +16,15 @@ class Parser
   NO              = [:no, :n,]
   ALL             = [YES, NO, GAME_INFO, HELP, QUIT, BACKWARD, FORWARD, USE_ITEM,
                     STATUS, RUN, ATTACK, LOOK, INVENTORY, TAKE]
-# Single letters already taken a, b, f, h, i, l, n, q, r, t, u 
+# Single letters already taken a, b, f, h, i, l, n, q, r, t, u
  def self.get_specific(options)
    input = :nil
    until options.include? input
      print ">>"
-     input = gets.chomp.tr(" ", "_").to_sym
+     input = gets.chomp.tr(" ", "_").downcase.to_sym
      unless options.include? input
        unless PERM_OPT.include? input
-         puts "That command wont work here..."
+         puts "That command wont work here... #{input} #{options}"
        end
      end
      breakout_commands(input)
