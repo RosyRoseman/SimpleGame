@@ -1,7 +1,7 @@
 class Roll
 GARBAGE                 = [Garbage]
 COMMON                  = [HealthPotion]
-RARE                    = [FirePotion]
+RARE                    = [FirePotion, ShortSword]
 
   def self.damage(dmgarray)
     damage = Array.new
@@ -24,5 +24,18 @@ RARE                    = [FirePotion]
     change = rand(range[0]..range[1])
     string = "#{change.to_s} #{:copper.to_s}"
     return [string, change, :copper]
+  end
+
+  def self.to_hit?(target, source)
+    roll = rand(1..20)
+    if target.ac && roll + source.bonus_to_hit > target.ac
+      return TRUE
+    elsif target.ac && roll + source.bonus_to_hit >= target.ac
+      puts "miss..."
+      return FALSE
+    else
+      puts "auto-hit"
+      return TRUE
+    end
   end
 end

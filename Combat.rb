@@ -9,8 +9,8 @@ class Combat
     @monster                            = monster
     @weapon                             = $equipped[:weapon]
     if @monster.alive?
-       @monster.hits($player)
-       @weapon.hits(@monster)
+       if Roll.to_hit?(@monster, $player); @monster.hits($player) end
+       if Roll.to_hit?($player, @monster); @weapon.hits(@monster) end
      else
        puts "The monster in this room is already dead..."
     end
@@ -18,11 +18,11 @@ class Combat
       input = Parser.get_input(COMBAT_ACTIONS)
       case input
       when :attack
-        if $player.alive?
-          @weapon.hits(@monster)
+        if $player.alive? && @monster.alive?
+          if Roll.to_hit?($player, @monster); @weapon.hits(@monster) end
           if @monster.alive?
             puts "It's at #{@monster.hp}"
-            @monster.hits($player)
+            if Roll.to_hit?(@monster, $player); @monster.hits($player) end
           else
             puts "He's dead jim."
             @monster.died

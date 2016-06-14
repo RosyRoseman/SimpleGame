@@ -15,6 +15,6 @@ class FirePotion < Potion
   end
   def give_effect(target)
     target.TakeDmg(Roll.damage(@damage))
-    unless target.alive? puts "He's dead jim."
+    puts "He's dead jim." unless target.alive?
   end
 end

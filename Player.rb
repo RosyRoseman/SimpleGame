@@ -23,4 +23,10 @@ class Player
     puts "Shit fam, you died fighting a #{@room_is[:content].name}"
     exit
   end
+  def bonus_to_hit
+    2
+  end
+  def ac
+    10
+  end
 end

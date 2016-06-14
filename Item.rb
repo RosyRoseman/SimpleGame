@@ -64,17 +64,7 @@ include Equipable
     target.TakeDmg(hits_for)
   end
 end
-<<<<<<< HEAD
 require './Weapons'
-=======
-###############################################
-class Weapon < Item
-include Equipable
-
-
-
-end
->>>>>>> master
 #####################################################
 class Garbage < Item
   TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup"]
