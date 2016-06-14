@@ -1,31 +1,41 @@
 class Item
-attr_accessor :name
+attr_accessor :name, :weight, :damage
 
   def name
     @name
   end
-
+  def weight
+    @weight
+  end
+  def damage
+    @damage
+  end
   def find#(find_seed)
     Random.item
   end
 end
 #########################################
 module Equipable
-
-end
-###########################################
-class Potion < Item
-
-  def drink(potion_name)
-    puts "You drink the #{potion_name}."
-    give_effect($player)
+  def equip
+    Inventory.equip(self)
   end
-
+  def unequip
+    Inventory.unequip(self)
+  end
+end
+module Throwable
   def throw(target)
     puts "You throw the #{self.name} at your target."
     give_effect(target)
   end
-
+end
+###########################################
+class Potion < Item
+include Throwable
+  def drink(potion_name)
+    puts "You drink the #{potion_name}."
+    give_effect($player)
+  end
   def found
     puts "Do you want to drink this?"
     input = Parser.get_input([:yes, :no])
@@ -35,27 +45,28 @@ class Potion < Item
         Inventory.add(self)
       end
   end
-
+  def use(target)
+    puts "Would you like to throw this or drink it?"
+    input = Parser.get_specific([:drink, :throw])
+    if input == :drink; self.drink(self.name)
+    elsif input == :throw; self.throw(target) end
+  end
 end
+require './Potions'
 ###################################################
-class HealthPotion < Potion
-  def initialize
-    @name = "Health Potion"
-  end
-  def give_effect(target)
-    target.HealDmg(10)
-    #remove from inventory
-  end
-end
-#######################################################
-class FirePotion < Potion
-  def initialize
-    @name = "Potion of Liquid Fire"
-  end
-  def give_effect(target)
-    target.TakeDmg(10)
+
+###############################################
+class Weapon < Item
+include Equipable
+  def hits(target)
+    hits_for = Roll.damage(@damage)
+    puts "You hit the monster with your #{self.name.downcase} for #{hits_for}."
+    target.TakeDmg(hits_for)
   end
 end
+<<<<<<< HEAD
+require './Weapons'
+=======
 ###############################################
 class Weapon < Item
 include Equipable
@@ -63,6 +74,7 @@ include Equipable
 
 
 end
+>>>>>>> master
 #####################################################
 class Garbage < Item
   TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup"]

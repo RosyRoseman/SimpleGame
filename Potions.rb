@@ -11,8 +11,10 @@ end
 class FirePotion < Potion
   def initialize
     @name = "Potion of Liquid Fire"
+    @damage = [3, 4]
   end
   def give_effect(target)
-    target.TakeDmg(10)
+    target.TakeDmg(Roll.damage(@damage))
+    unless target.alive? puts "He's dead jim."
   end
 end

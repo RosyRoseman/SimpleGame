@@ -62,6 +62,17 @@ class Room
     @room_is
   end
 
+  def print_room_status
+    @room_is = self.get_room_is
+    puts "You are in room number #{@room_is[:room_number]}."
+    puts "You are in a #{@room_is[:adjetive]} room, that is roughly #{@room_is[:size]}."
+    unless @room_is[:content][0].is_a? Symbol
+      puts "Inside you find a #{(@room_is[:content][0]).name}! Oh Shit!"
+    else
+      puts "Inside is now #{@room_is[:content][1]}"
+    end
+  end
+
   def clear(monster, loot)
     @room_is[:content] = [:dead_monster, "a dead #{monster}",  loot]
   end
@@ -72,7 +83,8 @@ class Room
   end
 
   def get_content
-    [[FrogLizard, LizardFrog].sample.new, Roll.item(1, 100)].sample
+#    Roll.item(30, 100)
+    [[[FrogLizard, LizardFrog].sample.new, Roll.item(1, 100)].sample]
   end
 
   def get_size

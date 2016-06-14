@@ -5,7 +5,7 @@ class Player
   attr_accessor
 
   def initialize
-    initialize_stats({maxHP: 10, WepDmg: [1,6]})
+    initialize_stats({maxHP: 20, WepDmg: [1,6]})
     Inventory.new
 
     puts 'Player Initialized'

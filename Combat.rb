@@ -1,5 +1,5 @@
 class Combat
-  COMBAT_ACTIONS  = [:attack, :run, :use_item, :help, :quit]
+  COMBAT_ACTIONS  = [:attack, :run, :use_item, :help, :quit, :status, :inventory]
 
   def intitialize
     puts "Combat Initialized"
@@ -7,9 +7,10 @@ class Combat
 
   def fight_monster(monster)
     @monster                            = monster
+    @weapon                             = $equipped[:weapon]
     if @monster.alive?
-       monster_hits
-       player_hits
+       @monster.hits($player)
+       @weapon.hits(@monster)
      else
        puts "The monster in this room is already dead..."
     end
@@ -18,10 +19,10 @@ class Combat
       case input
       when :attack
         if $player.alive?
-          player_hits
+          @weapon.hits(@monster)
           if @monster.alive?
             puts "It's at #{@monster.hp}"
-            monster_hits
+            @monster.hits($player)
           else
             puts "He's dead jim."
             @monster.died
@@ -31,27 +32,15 @@ class Combat
       when :run
         puts "This feature hasn't been implimented yet..."
       when :use_item
-        puts "This feature hasn't been implimented yet..."
-      when :help
-        puts "attack, run, use item"
+        Inventory.use(@monster)
       when :quit
         exit
+      when :status
+        puts "does status stuff"
+      when :inventory
+        Inventory.print_inventory
       end
     end
-  end
-
-  private
-
-  def player_hits
-    damage = Roll.damage($player.WepDmg)
-    puts "You hit the monster for #{damage}."
-    @monster.TakeDmg(damage)
-  end
-
-  def monster_hits
-    damage = Roll.damage(@monster.WepDmg)
-    puts "The monster hits back for #{damage} points of damage."
-    $player.TakeDmg(damage)
   end
 end
 ############################################################
