@@ -12,6 +12,7 @@ class Inventory
        else
           $inventory[thing] = 1
        end
+       puts "You put the #{thing} in your inventory."
      else
        puts "#{item.class}"
     end

@@ -1,5 +1,6 @@
 class Parser
   PERM_OPT        = [:quit, :help, :game_info]
+  TAKE            = [:take, :loot, :t, :grab, :pick_up]
   INVENTORY       = [:inventory, :i]
   LOOK            = [:look, :l, :loo, :ook, :look_around]
   ATTACK          = [:attack, :a, :attack, :atack, :attac, :attak, :atac, :atak]
@@ -14,8 +15,8 @@ class Parser
   YES             = [:yes, :y, :ye, :es, :yeah]
   NO              = [:no, :n,]
   ALL             = [YES, NO, GAME_INFO, HELP, QUIT, BACKWARD, FORWARD, USE_ITEM,
-                    STATUS, RUN, ATTACK, LOOK, INVENTORY]
-
+                    STATUS, RUN, ATTACK, LOOK, INVENTORY, TAKE]
+# Single letters already taken a, b, f, h, i, l, n, q, r, t, u 
  def self.get_specific(options)
    input = :nil
    until options.include? input

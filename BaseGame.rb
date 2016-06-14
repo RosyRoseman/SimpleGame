@@ -1,7 +1,7 @@
 require './Dependencies'
 
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item]
+  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item, :take]
 
   def initialize
     @world                          = World.new
@@ -76,6 +76,13 @@ class Game
       puts "needs to be one of #{$inventory.keys}"
       input = Parser.get_specific($inventory.keys)
       puts "was #{input} "
+    when :take
+      case @room_is[:content]
+      when Potion; @room_is[:content].found
+      when Garbage; puts "You really don't need to pick that up."
+      when Monster; puts "Yeah, maybe kill it first, before you try and put it in your pocket..."
+      else puts "This is wrong, tell the developers that you tried to pick up a #{@room_is[:content]}"
+      end
     end
   end
 end
