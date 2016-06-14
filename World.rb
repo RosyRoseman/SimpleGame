@@ -95,7 +95,7 @@ class Room
 
   def get_adjetive
     ["well-lit", "dim", "filthy", "suprisingly clean", "round", "muddy",
-     "oppressive"].sample
+     "oppressive", "dusty", "slimy"].sample
   end
 
   def get_room_type
