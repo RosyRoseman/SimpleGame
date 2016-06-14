@@ -1,32 +1,24 @@
 require './Combat'
 
 class Monster
+  attr_accessor :name
   include Combatable
-  attr_accessor :Type, :monster_species, :Name
-
-  def initialize
-    initialize_stats({maxHP: 10, WepDmg: [1,2]})
-#    @monster_is = {:species \\\, :level \\\, :stats \\\, :type \\\, :loot \\\}
-    @current_monster = get_species
-    @name = @current_monster
-    puts "Initialized Monster"
-  end
-
-  def get_current_monster
-    @current_monster
-  end
-
-  def self.call_new
-    Monster.new
-  end
-
   def name
     @name
   end
+end
 
-  private
-  def get_species
-    ["Frog Lizard", "Lizard Frog",
-      "Abnormal cross between a Frog and a Lizard"].sample
+
+class FrogLizard < Monster
+  def initialize
+    initialize_stats({maxHP: 10, WepDmg: [1,3]})
+    @name = "Frog Lizard"
+  end
+end
+
+class LizardFrog < Monster
+  def initialize
+    initialize_stats({maxHP: 7, WepDmg: [2,2]})
+    @name = "Lizard Frog"
   end
 end

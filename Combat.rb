@@ -25,6 +25,7 @@ class Combat
           else
             puts "He's dead jim."
           end
+        else $player.died
         end
       when :run
         puts "This feature hasn't been implimented yet..."
@@ -61,7 +62,6 @@ module Combatable
 
   def initialize_stats(stats)
     @stats = stats
-
     @HP               = stats[:maxHP]
     @WepDmg           = stats[:WepDmg]
   end

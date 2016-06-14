@@ -40,7 +40,6 @@ class Game
 
   def print_inventory
     $inventory.each {|pair| puts "#{pair.last} || #{pair.first.to_s}"}
-    puts " "
     puts "*" * 80
     puts "#{$inventory.count} items."
   end
@@ -50,7 +49,6 @@ class Game
     when :forward
       if @room_is[:content] && Monster === @room_is[:content] && @room_is[:content].alive?
         puts "You can't seem to get around the #{(@room_is[:content]).name}"
-        break
       else
         if @room == $dungeon_room_list.last
           $dungeon_room_list          << Room.new
@@ -66,13 +64,13 @@ class Game
     when :status
       $player.print_player_status
     when :attack
-      if (@room_is[:content]).instance_of? Monster
+      if Monster === (@room_is[:content])
          combat = Combat.new
          combat.fight_monster(@room_is[:content])
-      elsif (@room_is[:content]).instance_of? Item
-        puts "You want to attack a #{@name}? I think not."
+      elsif Item === (@room_is[:content])
+        puts "You want to attack a #{(@room_is[:content]).name}? I think not."
       else
-        puts "Error: Content is neither monster nor item."
+        puts "Error: Content is neither monster nor item. #{@room_is[:content]}"
       end
     when :inventory
       print_inventory

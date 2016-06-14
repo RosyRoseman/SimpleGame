@@ -5,7 +5,7 @@ class Player
   attr_accessor
 
   def initialize
-    initialize_stats({maxHP: 25, WepDmg: [1,6]})
+    initialize_stats({maxHP: 10, WepDmg: [1,6]})
     Inventory.new
 
     puts 'Player Initialized'
@@ -18,5 +18,9 @@ class Player
     puts "*" * 80
   end
 
-
+  def died
+    @room_is = $dungeon_room_list[$dungeon.get_room_of($player)-1].get_room_is
+    puts "Shit fam, you died fighting a #{@room_is[:content].name}"
+    exit
+  end
 end
