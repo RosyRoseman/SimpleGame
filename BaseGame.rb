@@ -35,7 +35,11 @@ class Game
     @room_is                       = @room.get_room_is
     puts "You are in room number #{@room_is[:room_number]}."
     puts "You are in a #{@room_is[:adjetive]} room, that is roughly #{@room_is[:size]}."
-    puts "Inside you find a #{(@room_is[:content]).name}! Oh Shit!"
+    unless @room_is[:content].is_a? Array
+      puts "Inside you find a #{(@room_is[:content]).name}! Oh Shit!"
+    else
+      puts "Inside is now #{@room_is[:content][1]}"
+    end
   end
 
   def print_inventory
@@ -84,6 +88,7 @@ class Game
       when Potion; @room_is[:content].found
       when Garbage; puts "You really don't need to pick that up."
       when Monster; puts "Yeah, maybe kill it first, before you try and put it in your pocket..."
+      when Array; "You turn over the corpse and rustle around in its pockets for #{@room_is[:content][2]}"
       else puts "This is wrong, tell the developers that you tried to pick up a #{@room_is[:content]}"
       end
     end

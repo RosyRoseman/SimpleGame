@@ -15,8 +15,13 @@ RARE                    = [FirePotion]
     found = case rand(low..high)
     when (86..100);          RARE
     when (51..85);           COMMON
-    when (1..50);            GARBAGE 
+    when (1..50);            GARBAGE
     end
     found.sample.new
+  end
+
+  def self.gold(range)
+    change = rand(range[0]..range[1])
+    return [change, :copper]
   end
 end

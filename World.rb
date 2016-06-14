@@ -62,6 +62,9 @@ class Room
     @room_is
   end
 
+  def clear(monster, loot)
+    @room_is[:content] = [:dead_monster, "a dead #{monster}",  loot]
+  end
   private
 
   def get_new_room_number
@@ -86,6 +89,4 @@ class Room
   def get_room_type
     "room type"
   end
-
-
 end
