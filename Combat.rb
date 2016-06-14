@@ -7,9 +7,10 @@ class Combat
 
   def fight_monster(monster)
     @monster                            = monster
+    @weapon                             = $equipped[:weapon]
     if @monster.alive?
        monster_hits
-       player_hits
+       @weapon.hits(@monster)
      else
        puts "The monster in this room is already dead..."
     end
@@ -18,7 +19,7 @@ class Combat
       case input
       when :attack
         if $player.alive?
-          player_hits
+          @weapon.hits(@monster)
           if @monster.alive?
             puts "It's at #{@monster.hp}"
             monster_hits
@@ -41,12 +42,6 @@ class Combat
   end
 
   private
-
-  def player_hits
-    damage = Roll.damage($player.WepDmg)
-    puts "You hit the monster for #{damage}."
-    @monster.TakeDmg(damage)
-  end
 
   def monster_hits
     damage = Roll.damage(@monster.WepDmg)

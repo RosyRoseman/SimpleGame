@@ -1,7 +1,9 @@
 class Inventory
-
+attr_accessor :equipped
   def initialize
-  $inventory = {bludgeon: 1}
+    @starting_weapon = Bludgeon.new
+    $inventory = {bludgeon: [1, @starting_weapon, @starting_weapon.weight]}
+    $equipped = {weapon: @starting_weapon}
   end
 
   def self.add(item)
@@ -17,8 +19,12 @@ class Inventory
        puts "#{item.class}"
     end
   end
-
-
+  def equip(item)
+    $equipped[item.class] = item
+  end
+  def self.equipped
+    $equipped
+  end
 
 
 

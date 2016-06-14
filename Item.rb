@@ -1,12 +1,15 @@
-require './Potions'
-require './Weapons'
 class Item
-attr_accessor :name
+attr_accessor :name, :weight, :damage
 
   def name
     @name
   end
-
+  def weight
+    @weight
+  end
+  def damage
+    @damage
+  end
   def find#(find_seed)
     Random.item
   end
@@ -39,13 +42,19 @@ include Throwable
   end
 
 end
+require './Potions'
 ###################################################
 
 ###############################################
 class Weapon < Item
 include Equipable
-
+  def hits(target)
+    hits_for = Roll.damage(@damage)
+    puts "You hit the monster with your #{self.name.downcase} for #{hits_for}."
+    target.TakeDmg(hits_for)
+  end
 end
+require './Weapons'
 #####################################################
 class Garbage < Item
   TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup"]

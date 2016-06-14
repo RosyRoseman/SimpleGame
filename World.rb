@@ -72,7 +72,7 @@ class Room
   end
 
   def get_content
-    [[FrogLizard, LizardFrog].sample.new, Roll.item(1, 100)].sample
+    [[[FrogLizard, LizardFrog].sample.new, Roll.item(1, 100)].sample]
   end
 
   def get_size
