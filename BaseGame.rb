@@ -1,7 +1,7 @@
 require './Dependencies'
 
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack]
+  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item, :take]
 
   def initialize
     @world                          = World.new
@@ -38,14 +38,26 @@ class Game
     puts "Inside you find a #{(@room_is[:content]).name}! Oh Shit!"
   end
 
+  def print_inventory
+    $inventory.each {|pair| puts "#{pair.last} || #{pair.first.to_s}"}
+    puts " "
+    puts "*" * 80
+    puts "#{$inventory.count} items."
+  end
+
   def take_action(action)
     case action
     when :forward
-      if @room == $dungeon_room_list.last
-        $dungeon_room_list          << Room.new
+      if @room_is[:content] && Monster === @room_is[:content] && @room_is[:content].alive?
+        puts "You can't seem to get around the #{(@room_is[:content]).name}"
+        break
+      else
+        if @room == $dungeon_room_list.last
+          $dungeon_room_list          << Room.new
+        end
+        $dungeon.player_forward
+        print_status
       end
-      $dungeon.player_forward
-      print_status
     when :backward
       $dungeon.player_backward
       @room                         = $dungeon_room_list[@current_room-1]
@@ -61,6 +73,20 @@ class Game
         puts "You want to attack a #{@name}? I think not."
       else
         puts "Error: Content is neither monster nor item."
+      end
+    when :inventory
+      print_inventory
+    when :use_item
+      puts "What would you like to use?"
+      puts "needs to be one of #{$inventory.keys}"
+      input = Parser.get_specific($inventory.keys)
+      puts "was #{input} "
+    when :take
+      case @room_is[:content]
+      when Potion; @room_is[:content].found
+      when Garbage; puts "You really don't need to pick that up."
+      when Monster; puts "Yeah, maybe kill it first, before you try and put it in your pocket..."
+      else puts "This is wrong, tell the developers that you tried to pick up a #{@room_is[:content]}"
       end
     end
   end

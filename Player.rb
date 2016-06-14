@@ -6,6 +6,7 @@ class Player
 
   def initialize
     initialize_stats({maxHP: 25, WepDmg: [1,6]})
+    Inventory.new
 
     puts 'Player Initialized'
   end

@@ -1,4 +1,7 @@
 class Roll
+GARBAGE                 = [Garbage]
+COMMON                  = [HealthPotion]
+RARE                    = [FirePotion]
 
   def self.damage(dmgarray)
     damage = Array.new
@@ -8,4 +11,12 @@ class Roll
     damage = damage.inject(:+)
   end
 
+  def self.item(low, high)
+    found = case rand(low..high)
+    when (86..100);          RARE
+    when (51..85);           COMMON
+    when (1..50);            GARBAGE 
+    end
+    found.sample.new
+  end
 end

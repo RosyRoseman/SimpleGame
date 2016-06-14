@@ -16,6 +16,10 @@ class Monster
     @current_monster
   end
 
+  def self.call_new
+    Monster.new
+  end
+
   def name
     @name
   end
