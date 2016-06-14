@@ -24,6 +24,7 @@ class Combat
             monster_hits
           else
             puts "He's dead jim."
+            @monster.died
           end
         else $player.died
         end
