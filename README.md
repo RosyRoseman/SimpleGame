@@ -9,7 +9,7 @@ Text based dungeon crawler started as practice for Ruby.
 - Module-ize items more? 'drinkable' 'throwable' 'wearable'? or stick more with inheritance?
 - Expand monster list
 - Expand room content randomizer
-- Better find item prompt
+- ~Better find item prompt~
 - Reduce 'world initialized' messages
 - Character creation, name and the like.
 - Death message
