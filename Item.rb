@@ -1,17 +1,7 @@
 class Item
-attr_accessor :name, :weight, :damage
-
-  def name
-    @name
-  end
-  def weight
-    @weight
-  end
-  def damage
-    @damage
-  end
-  def find#(find_seed)
-    Random.item
+attr_accessor :attributes
+  def attributes
+    @item_attributes = {name: @name, weight: @weight, rarity: @rarity, value: @value, damage: @damage}
   end
 end
 #########################################
