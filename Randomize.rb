@@ -28,13 +28,14 @@ RARE                    = [FirePotion, ShortSword]
 
   def self.to_hit?(target, source)
     roll = rand(1..20)
-    if target.ac && roll + source.bonus_to_hit > target.ac
+    unless target.ac then puts "auto-hit -no ac" and return TRUE end
+    if target.ac && roll + source.bonus_to_hit >= target.ac
       return TRUE
-    elsif target.ac && roll + source.bonus_to_hit >= target.ac
+    elsif target.ac && roll + source.bonus_to_hit < target.ac
       puts "miss..."
       return FALSE
     else
-      puts "auto-hit"
+      puts "auto-hit -else"
       return TRUE
     end
   end
