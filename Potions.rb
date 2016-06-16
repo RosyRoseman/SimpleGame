@@ -5,8 +5,8 @@ class HealthPotion < Potion
   def give_effect(target)
     target.HealDmg(10)
     puts "You feel reinvigorated and ready for more combat!"
-    sleep(1)
-    puts "Drink any more of this and you might just grow an extra limb!"
+#    sleep(1)
+    puts "Drink more of this and you might just grow an extra limb!"
     #remove from inventory
   end
 end
