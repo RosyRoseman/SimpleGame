@@ -19,7 +19,7 @@ class FirePotion < Potion
   def give_effect(target)
     target.TakeDmg(Roll.damage(@damage))
     puts "*whoosh*"
-    sleep(1)
+#    sleep(1)
     puts "He's dead, Jim." unless target.alive?
   end
 end
@@ -32,7 +32,7 @@ class PoisonPotion < Potion
   def give_effect(target)
     target.TakeDmg(Roll.damage(@damage))
     puts "*cough* *cough*"
-    sleep(1)
+#    sleep(1)
     puts "He's dead, Jim." unless target.alive?
   end
 end
@@ -45,5 +45,7 @@ class AcidPotion < Potion
   def give_effect(target)
     target.TakeDmg(Roll.damage(@damage))
     puts "It burnssss usss"
-    sleep(1)
+#    sleep(1)
     puts "He's dead, Jim." unless target.alive?
+  end
+end
