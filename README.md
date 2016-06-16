@@ -26,4 +26,3 @@ Text based dungeon crawler started as practice for Ruby.
 - Add Saves
 - Add tetanus/poison attributes for weapon, monster, combat
 - Re-do object/monster randomization by creating an Hash tree of inheritance for each class Item{Potion: [HealthPotion, FirePotion], Weapon: [ShortSword, Bludgeon]} etc. Better referenceing of "Get me a Potion" kind of calls. Access to each class from one central hash.
-
