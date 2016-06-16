@@ -45,33 +45,19 @@ class Combat
 end
 ############################################################
 module Combatable
-
-  def Combatable.included(mod)
-    attr_accessor :HP, :WepDmg
-  end
-
-  def initialize_stats(stats)
-    @stats = stats
-    @HP               = stats[:maxHP]
-    @WepDmg           = stats[:WepDmg]
-  end
-
   def alive?
-    @HP > 0
+    @attributes[:hp] > 0
   end
-
-  def hp
-    @HP
-  end
-
   def TakeDmg(amount)
-    @HP -= amount
+    @attributes[:hp] -= amount
   end
-
   def HealDmg(amount)
-    @HP += amount
-    @HP = [@HP, @stats[:maxHP]].min
+    @attributes[:hp] += amount
+    @attributes[:hp] = [@attributes[:hp], @attributes[:maxhp]].min
+  end
+  def debuff(stat, amount)
+    @attributes[:debuff] = [stat, amount]
+    @attributes[stats[stat]] -= amount
   end
 end
-
 ##########################################################

@@ -4,9 +4,9 @@ class Monster
   attr_accessor :mon_attributes
   include Combatable
   def attributes
-    @mon_attributes = {name: @name, ac: @ac, bab: @bab, hp: @hp, maxhp: @maxhp,
-                       wepdmg: @wepdmg, stats: @stats, commonality: @commonality
-                       level: @level}
+    @attributes = {name: @name, ac: @ac, bab: @bab, hp: @hp, maxhp: @maxhp,
+                   wepdmg: @wepdmg, stats: @stats, commonality: @commonality
+                   level: @level, loot: @loot}
   end
   def died
     $dungeon_room_list[($dungeon.get_room_of($player))-1].clear(self.name, Roll.gold(self.loot))#<<For the death flavor text.
@@ -22,7 +22,6 @@ end
 
 class FrogLizard < Monster
   def initialize
-    initialize_stats({maxHP: 10, WepDmg: [1,3]})
     @name                     = "Frog Lizard"
     @ac                       = 8
     @bab                      = 0
@@ -31,9 +30,7 @@ class FrogLizard < Monster
     @stats                    = {str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8}
     @commonality              = 100
     @level                    = 1
-  end
-  def loot
-    range = [2, 5]
+    @loot                     = [2, 5, :copper]
   end
 end
 

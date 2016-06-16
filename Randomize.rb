@@ -22,7 +22,7 @@ RARE                    = [FirePotion, ShortSword]
 
   def self.gold(range)
     change = rand(range[0]..range[1])
-    string = "#{change.to_s} #{:copper.to_s}"
+    string = "#{change.to_s} #{range[2].to_s}"
     return [string, change, :copper]
   end
 
