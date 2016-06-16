@@ -22,7 +22,7 @@ class Game
       input = Parser.get_input(ACTIONS)
       take_action(input)
     end
-    puts "Game Over Wah Wah Wa~uh"
+    puts "Game Over. Wah Wah Wa~uh"
     exit
   end
 ##############################################

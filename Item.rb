@@ -67,7 +67,7 @@ end
 require './Weapons'
 #####################################################
 class Garbage < Item
-  TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup"]
+  TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup", "torn rags", "piece of driftwood"]
   def initialize
     @name = TRASH.sample
   end

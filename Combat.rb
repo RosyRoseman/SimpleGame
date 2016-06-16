@@ -30,7 +30,7 @@ class Combat
         else $player.died
         end
       when :run
-        puts "This feature hasn't been implimented yet..."
+        puts "This feature hasn't been implemented yet..."
       when :use_item
         Inventory.use(@monster)
       when :quit

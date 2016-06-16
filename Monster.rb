@@ -47,3 +47,52 @@ class LizardFrog < Monster
     range = [2, 5]
   end
 end
+
+#Tweak the numbers however you'd like on these. I'm just coming up with monster names and stats for shits and giggles
+class Spider < Monster
+  def initialize
+    initialize_stats({maxHP: 6, WepDmg: [1,2]})
+    @name = "Spider"
+    @ac = 6
+    @bonus_to_hit = 0
+  end
+  def loot
+    range = [2, 5]
+  end
+end
+
+class GiantSpider < Monster
+  def initialize
+    initialize_stats({maxHP: 12, WepDmg: [2,6]})
+    @name = "Giant Spider"
+    @ac = 8
+    @bonus_to_hit = 0
+  end
+  def loot
+    range = [2, 5]
+  end
+end
+
+class Shadeling < Monster
+  def initialize
+    initialize_stats({maxHP: 8, WepDmg: [2,2]})
+    @name = "Shadeling"
+    @ac = 10
+    @bonus_to_hit = 0
+  end
+  def loot
+    range = [2, 5]
+  end
+end
+
+class StoneGolem < Monster
+  def initialize
+    initialize_stats({maxHP: 9, WepDmg: [2,2]})
+    @name = "Stone Golem"
+    @ac = 8
+    @bonus_to_hit = 0
+  end
+  def loot
+    range = [2, 5]
+  end
+end
