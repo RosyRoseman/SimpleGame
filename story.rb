@@ -3,11 +3,18 @@ class Story
   def self.introduction
 #      puts "You stand at the entrance to a dungeon."
 #      sleep(2)
-#      puts "Inside are monsters."
+#      puts "Inside are monsters..."
 #      sleep(2)
-#      puts "Scary monsters."
+#      puts "...scary monsters..."
 #      sleep(2)
-      puts "Wanna go get started?"
+#      puts "...but also treasure..."
+#      sleep(2)
+#      puts "...and riches..."
+#      sleep(2)
+#      puts "...and glory, wealth, and fame beyond your wildest dreams."
+#      sleep(2)
+
+      puts "Do you dare enter this dungeon?"
       while true
       input = Parser.get_input([:yes, :no])
         if input == :yes
