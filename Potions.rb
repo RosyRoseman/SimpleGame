@@ -23,7 +23,7 @@ class FirePotion < Potion
     puts "He's dead, Jim." unless target.alive?
   end
 end
-
+######################################################
 class PoisonPotion < Potion
   def initialize
     @name = "Potion of Poison"
@@ -31,12 +31,13 @@ class PoisonPotion < Potion
   end
   def give_effect(target)
     target.TakeDmg(Roll.damage(@damage))
+    target.give_status_effect(:poisoned)
     puts "*cough* *cough*"
 #    sleep(1)
     puts "He's dead, Jim." unless target.alive?
   end
 end
-
+######################################################
 class AcidPotion < Potion
   def initialize
     @name = "Potion of Burning Acid"
