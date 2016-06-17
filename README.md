@@ -11,11 +11,10 @@ type <cd SimpleGame>
 type <ruby BaseGame.rb>
 
 ## Template for adding things
-# check this before adding stuff 
+# check this before adding stuff
 -Templates.rb
 
 ### Things to be worked on.
-- MAKE HEALTH POTIONS GO AWAY
 - Flow combat with status effects
 - Make armor
 - Create basegame 'cleanup' function

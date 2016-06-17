@@ -42,7 +42,7 @@ include Throwable
   def use(target)
     puts "Would you like to throw this or drink it?"
     input = Parser.get_specific([:drink, :throw])
-    if input == :drink; self.drink(self.name)
+    if input == :drink; self.drink(@attributes[:name])
     elsif input == :throw; self.throw(target) end
   end
 end

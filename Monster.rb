@@ -44,7 +44,6 @@ end
 
 class LizardFrog < Monster
   def initialize
-    status_start
     @name                     = "Lizard Frog"
     @ac                       = 8
     @bab                      = 0
@@ -56,6 +55,7 @@ class LizardFrog < Monster
     @level                    = 1
     @loot                     = [2, 5, :copper]
     @description              = "Its a frog that is also a lizard."
+    attributes_are
   end
 end
 
@@ -73,6 +73,7 @@ class Spider < Monster
     @level                    = 1
     @loot                     = [2, 5, :copper]
     @description              = "Its a spider. What do you want?"
+    attributes_are
   end
 end
 
@@ -89,6 +90,7 @@ class GiantSpider < Monster
     @level                    = 1
     @loot                     = [2, 5, :copper]
     @description              = "Its a bigger spider."
+    attributes_are
   end
 end
 
@@ -105,6 +107,7 @@ class Shadeling < Monster
     @level                    = 1
     @loot                     = [2, 5, :copper]
     @description              = "Its a small Shade."
+    attributes_are
   end
 end
 
@@ -121,6 +124,7 @@ class StoneGolem < Monster
     @level                    = 1
     @loot                     = [2, 5, :copper]
     @description              = "Its a big stone dude."
+    attributes_are
   end
 end
 
@@ -133,9 +137,10 @@ class Skeleton < Monster
     @hp                       = @maxhp
     @wepdmg                   = [1, 8]
     @stats                    = {str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8}
-    @commonality              = 100
+    @commonality              = 20
     @level                    = 1
     @loot                     = [3, 10, :copper]
     @description              = "Doot Doot."
+    attributes_are
   end
 end

@@ -23,7 +23,8 @@ attr_accessor :equiped
     puts "What item would you like to use?"
     print_inventory
     input = Parser.get_specific($inventory.keys)
-    $inventory[input][:is].first.use(target)
+    $inventory[input][:is].pop.use(target)
+    unless $inventory[input][:is].any?; then $inventory.delete(input) end 
   end
   def self.equip(item)
     $equipped[item.class] = item

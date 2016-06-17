@@ -19,7 +19,7 @@ RARE                    = [FirePotion, LongSword, Spear]
     when (41..65);           COMMON
     when (1..40);            GARBAGE
     end
-    found.sample.new
+    found.sample
   end
 
   def self.gold(range)
