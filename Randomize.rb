@@ -1,7 +1,8 @@
 class Roll
-GARBAGE                 = [Garbage]
-COMMON                  = [HealthPotion]
-RARE                    = [FirePotion, ShortSword]
+GARBAGE                 = [Garbage, PointyStick, Butterknife]
+COMMON                  = [HealthPotion, Dagger]
+UNCOMMON                = [ShortSword, Hatchet, FryingPan]
+RARE                    = [FirePotion, LongSword, Spear]
 
   def self.damage(dmgarray)
     damage = Array.new
@@ -14,8 +15,9 @@ RARE                    = [FirePotion, ShortSword]
   def self.item(low, high)
     found = case rand(low..high)
     when (86..100);          RARE
-    when (51..85);           COMMON
-    when (1..50);            GARBAGE
+    when (66..85);           UNCOMMON
+    when (41..65);           COMMON
+    when (1..40);            GARBAGE
     end
     found.sample.new
   end
