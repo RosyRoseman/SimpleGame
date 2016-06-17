@@ -72,7 +72,7 @@ class Spider < Monster
     @commonality              = 100
     @level                    = 1
     @loot                     = [2, 5, :copper]
-    @description              = "Its a spider. What do you want?"
+    @description              = "You ever seen Spiderman? It's like that but with less radioactivity."
     attributes_are
   end
 end
@@ -130,7 +130,7 @@ end
 
 class Skeleton < Monster
   def initialize
-    @name                     = "Mr. Skeletal"
+    @name                     = "Skeleton"
     @ac                       = 6
     @bab                      = 2
     @maxhp                    = 15
@@ -140,7 +140,7 @@ class Skeleton < Monster
     @commonality              = 20
     @level                    = 1
     @loot                     = [3, 10, :copper]
-    @description              = "Doot Doot."
+    @description              = "2spoopy"
     attributes_are
   end
 end
