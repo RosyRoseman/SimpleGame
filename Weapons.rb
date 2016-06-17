@@ -62,7 +62,7 @@ class Butterknife < Weapon
   end
 end
 
-class Spear < Weapons
+class Spear < Weapon
   def initialize
     @name = "Spear"
     @weight = 2
@@ -70,7 +70,7 @@ class Spear < Weapons
   end
 end
 
-class FryingPan < Weapons
+class FryingPan < Weapon
   def initialize
     @name = "Frying Pan"
     @weight = 1
