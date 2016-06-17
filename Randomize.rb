@@ -22,16 +22,16 @@ RARE                    = [FirePotion, ShortSword]
 
   def self.gold(range)
     change = rand(range[0]..range[1])
-    string = "#{change.to_s} #{:copper.to_s}"
+    string = "#{change.to_s} #{range[2].to_s}"
     return [string, change, :copper]
   end
 
   def self.to_hit?(target, source)
     roll = rand(1..20)
-    unless target.ac then puts "auto-hit -no ac" and return TRUE end
-    if target.ac && roll + source.bonus_to_hit >= target.ac
+    unless target.attributes[:ac] then puts "auto-hit -no ac" and return TRUE end
+    if target.attributes[:ac] && roll + source.attributes[:bab] >= target.attributes[:ac]
       return TRUE
-    elsif target.ac && roll + source.bonus_to_hit < target.ac
+    elsif target.attributes[:ac] && roll + source.attributes[:bab] < target.attributes[:ac]
       puts "miss..."
       return FALSE
     else

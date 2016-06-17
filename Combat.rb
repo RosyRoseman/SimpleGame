@@ -21,7 +21,7 @@ class Combat
         if $player.alive? && @monster.alive?
           if Roll.to_hit?($player, @monster); @weapon.hits(@monster) end
           if @monster.alive?
-            puts "It's at #{@monster.hp}"
+            puts "It's at #{@monster.attributes[:hp]}"
             if Roll.to_hit?(@monster, $player); @monster.hits($player) end
           else
             puts "He's dead jim."
@@ -45,33 +45,49 @@ class Combat
 end
 ############################################################
 module Combatable
-
-  def Combatable.included(mod)
-    attr_accessor :HP, :WepDmg
-  end
-
-  def initialize_stats(stats)
-    @stats = stats
-    @HP               = stats[:maxHP]
-    @WepDmg           = stats[:WepDmg]
+  def status_start
+    @status_effects = {debuff: FALSE, petrified: FALSE, poisoned: FALSE, asleep: FALSE, frozen: FALSE, confused: FALSE}
   end
 
   def alive?
-    @HP > 0
+    self.attributes[:hp] > 0
   end
-
-  def hp
-    @HP
-  end
-
   def TakeDmg(amount)
-    @HP -= amount
+    @attributes[:hp] -= amount
+    puts "#{@attributes[:hp]}"
+    puts "#{self.attributes[:hp]}"
   end
-
   def HealDmg(amount)
-    @HP += amount
-    @HP = [@HP, @stats[:maxHP]].min
+    @attributes[:hp] += amount
+    @attributes[:hp] = [@attributes[:hp], @attributes[:maxhp]].min
+  end
+  def debuff(stat, amount)
+    @attributes[:status_effects][:debuff] = [TRUE, {stat =>  amount}]
+    @attributes[:stats][stat] -= amount
+  end
+  def remove_debuff(stat)
+    if @attributes[:status_effects][:debuff] != FALSE && @attributes[:status_effects][:debuff][1][stat]
+       @attributes[:stats][stat] += @attributes[:status_effects][:debuff][1][stat]
+       @attributes[:status_effects][:debuff][1].delete(stat)
+       unless @attributes[:status_effects][:debuff][1]
+         @attributes[:status_effects][:debuff] = FALSE
+       end
+    elsif @attributes[:status_effects][:debuff] != FALSE
+       puts "That attribute isnt debuffed at the moment."
+    else
+       puts "You aren't suffering any debuffs at the moment."
+    end
+  end
+  def give_status_effect(effect)
+    @attributes[:status_effects][effect] = TRUE
+  end
+  def remove_status_effect(effect)
+    if effect == :all
+      @attributes[:status_effects].each_key |key|
+      key = FALSE
+    else
+      @attributes[:status_effects][effect] = FALSE
+    end
   end
 end
-
 ##########################################################

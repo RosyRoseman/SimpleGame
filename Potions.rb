@@ -1,6 +1,7 @@
 class HealthPotion < Potion
   def initialize
     @name = "Health Potion"
+    attributes_are
   end
   def give_effect(target)
     target.HealDmg(10)
@@ -15,6 +16,7 @@ class FirePotion < Potion
   def initialize
     @name = "Potion of Liquid Fire"
     @damage = [3, 4]
+    attributes_are
   end
   def give_effect(target)
     target.TakeDmg(Roll.damage(@damage))
@@ -23,20 +25,22 @@ class FirePotion < Potion
     puts "He's dead, Jim." unless target.alive?
   end
 end
-
+######################################################
 class PoisonPotion < Potion
   def initialize
     @name = "Potion of Poison"
     @damage = [1, 8]
+
   end
   def give_effect(target)
     target.TakeDmg(Roll.damage(@damage))
+    target.give_status_effect(:poisoned)
     puts "*cough* *cough*"
 #    sleep(1)
     puts "He's dead, Jim." unless target.alive?
   end
 end
-
+######################################################
 class AcidPotion < Potion
   def initialize
     @name = "Potion of Burning Acid"

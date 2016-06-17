@@ -1,6 +1,14 @@
 # SimpleGame
 Text based dungeon crawler started as practice for Ruby.
 
+## TO PLAY
+Download the .zip file.
+Extract to desktop
+open Terminal or Command prompt
+(without the < >)
+type <cd Desktop>
+type <cd SimpleGame>
+type <ruby BaseGame.rb>
 
 ### Things to be worked on.
 - Make inventory limit
