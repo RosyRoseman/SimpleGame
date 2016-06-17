@@ -10,7 +10,15 @@ type <cd Desktop>
 type <cd SimpleGame>
 type <ruby BaseGame.rb>
 
+## Template for adding things
+# check this before adding stuff 
+-Templates.rb
+
 ### Things to be worked on.
+- MAKE HEALTH POTIONS GO AWAY
+- Flow combat with status effects
+- Make armor
+- Create basegame 'cleanup' function
 - Make inventory limit
 - Fix bug where total inventory counts different items and not total items, should I give each item a weight value?
 - Expand Item list
