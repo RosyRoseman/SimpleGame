@@ -97,3 +97,15 @@ class StoneGolem < Monster
     range = [2, 5]
   end
 end
+
+class Skeleton < Monster
+  def initialize
+    initialize_stats({maxHP: 6, WepDmg: [2,2]})
+    @name = "Skeleton"
+    @ac = 6
+    @bonus_to_hit = 0
+  end
+  def loot
+    range = [2, 5]
+  end
+end
