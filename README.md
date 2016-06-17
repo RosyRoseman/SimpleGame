@@ -15,6 +15,7 @@ type <ruby BaseGame.rb>
 -Templates.rb
 
 ### Things to be worked on.
+- Roll.room_content
 - Flow combat with status effects
 - Make armor
 - Create basegame 'cleanup' function
