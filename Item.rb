@@ -1,8 +1,7 @@
 class Item
 attr_accessor :attributes
   def attributes_are
-    @attributes = {name: @name, weight: @weight, rarity: @rarity, value: @value,
-                        damage: @damage}
+    @attributes = {name: @name, weight: @weight, rarity: @rarity, value: @value, damage: @damage}
   end
   def attributes
     @attributes
@@ -17,9 +16,10 @@ module Equipable
     Inventory.unequip(self)
   end
 end
+################################################
 module Throwable
   def throw(target)
-    puts "You throw the #{self.name} at your target."
+    puts "You throw the #{@attributes[:name]} at your target."
     give_effect(target)
   end
 end
@@ -27,7 +27,7 @@ end
 class Potion < Item
 include Throwable
   def drink(potion_name)
-    puts "You drink the #{potion_name}."
+    puts "You drink the #{@attributes[:name]}."
     give_effect($player)
   end
   def found
@@ -48,13 +48,11 @@ include Throwable
 end
 require './Potions'
 ###################################################
-
-###############################################
 class Weapon < Item
 include Equipable
   def hits(target)
     hits_for = Roll.damage(@attributes[:damage])
-    puts "You hit the monster with your #{self.attributes[:name]} for #{hits_for}."
+    puts "You hit the monster with your #{@attributes[:name]} for #{hits_for}."
     target.TakeDmg(hits_for)
   end
 end
@@ -64,5 +62,6 @@ class Garbage < Item
   TRASH = ["old tin-can", "rusty sword", "crushed helm", "bent pewter cup", "torn rags", "piece of driftwood"]
   def initialize
     @name = TRASH.sample
+    attributes_are
   end
 end

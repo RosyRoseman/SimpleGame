@@ -36,8 +36,8 @@ class Player
   end
 
   def died
-    @room_is = $dungeon_room_list[$dungeon.get_room_of($player)-1].get_room_is
-    puts "Shit fam, you died fighting a #{@room_is[:content].name}"
+    @attributes = $dungeon_room_list[$dungeon.get_room_of($player)-1].attributes
+    puts "Shit fam, you died fighting a #{@attributes[:content].name}"
     exit
   end
 end
