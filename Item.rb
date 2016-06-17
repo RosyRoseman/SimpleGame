@@ -1,7 +1,8 @@
 class Item
 attr_accessor :attributes
   def attributes
-    @item_attributes = {name: @name, weight: @weight, rarity: @rarity, value: @value, damage: @damage}
+    @item_attributes = {name: @name, weight: @weight, rarity: @rarity, value: @value,
+                        damage: @damage}
   end
 end
 #########################################

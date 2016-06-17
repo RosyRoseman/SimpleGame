@@ -45,6 +45,9 @@ class Combat
 end
 ############################################################
 module Combatable
+  def status_start
+    @status_effects = {debuff: FALSE, petrified: FALSE, poisoned: FALSE, asleep: FALSE, frozen: FALSE, confused: FALSE}
+  end
   def alive?
     @attributes[:hp] > 0
   end
@@ -56,8 +59,32 @@ module Combatable
     @attributes[:hp] = [@attributes[:hp], @attributes[:maxhp]].min
   end
   def debuff(stat, amount)
-    @attributes[:debuff] = [stat, amount]
-    @attributes[stats[stat]] -= amount
+    @attributes[:status_effects][:debuff] = [TRUE, {stat, amount}]
+    @attributes[:stats][stat] -= amount
+  end
+  def remove_debuff(stat)
+    if @attributes[:status_effects][:debuff] != FALSE && @attributes[:status_effects][:debuff][1][stat]
+       @attributes[:stats][stat] += @attributes[:status_effects][:debuff][1][stat]
+       @attributes[:status_effects][:debuff][1].delete(stat)
+       unless @attributes[:status_effects][:debuff][1]
+         @attributes[:status_effects][:debuff] = FALSE
+       end
+    elsif @attributes[:status_effects][:debuff] != FALSE && not @attributes [:status_effects][:debuff][1][stat]
+       puts "That attribute isnt debuffed at the moment."
+    else
+       puts "You aren't suffering any debuffs at the moment."
+    end
+  end
+  def give_status_effect(effect)
+    @attributes[:status_effects][effect] = TRUE
+  end
+  def remove_status_effect(effect)
+    if effect == :all
+      @attributes[:status_effects].each_key |key|
+      key = FALSE
+    else
+      @attributes[:status_effects][effect] = FALSE
+    end
   end
 end
 ##########################################################

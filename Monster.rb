@@ -6,7 +6,8 @@ class Monster
   def attributes
     @attributes = {name: @name, ac: @ac, bab: @bab, hp: @hp, maxhp: @maxhp,
                    wepdmg: @wepdmg, stats: @stats, commonality: @commonality
-                   level: @level, loot: @loot}
+                   level: @level, loot: @loot, status_effects: @status_effects,
+                   description: @description}
   end
   def died
     $dungeon_room_list[($dungeon.get_room_of($player))-1].clear(self.name, Roll.gold(self.loot))#<<For the death flavor text.
@@ -22,6 +23,7 @@ end
 
 class FrogLizard < Monster
   def initialize
+    status_start
     @name                     = "Frog Lizard"
     @ac                       = 8
     @bab                      = 0
@@ -31,6 +33,7 @@ class FrogLizard < Monster
     @commonality              = 100
     @level                    = 1
     @loot                     = [2, 5, :copper]
+    @description              = "Its a lizard that is also a frog."
   end
 end
 
