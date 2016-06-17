@@ -67,7 +67,7 @@ class Room
     puts "You are in room number #{@room_is[:room_number]}."
     puts "You are in a #{@room_is[:adjetive]} room, that is roughly #{@room_is[:size]}."
     unless @room_is[:content][0].is_a? Symbol
-      puts "Inside you find a #{(@room_is[:content][0]).name}! Oh Shit!"
+      puts "Inside you find a #{(@room_is[:content][0]).attributes[:name]}! Oh Shit!"
     else
       puts "Inside is now #{@room_is[:content][1]}"
     end
@@ -84,7 +84,8 @@ class Room
 
   def get_content
 #    Roll.item(30, 100)
-    [[[FrogLizard, LizardFrog, GiantSpider, Shadeling, Spider, StoneGolem].sample.new, Roll.item(1, 100)].sample]
+#    [[[FrogLizard, LizardFrog, GiantSpider, Shadeling, Spider, StoneGolem].sample.new, Roll.item(1, 100)].sample]
+    [[[FrogLizard].sample.new, HealthPotion.new].sample]
   end
 
   def get_size

@@ -1,20 +1,23 @@
 require './Combat'
 
 class Monster
-  attr_accessor :mon_attributes
+  attr_accessor :attributes
   include Combatable
-  def attributes
+  def attributes_are
     @attributes = {name: @name, ac: @ac, bab: @bab, hp: @hp, maxhp: @maxhp,
-                   wepdmg: @wepdmg, stats: @stats, commonality: @commonality
+                   wepdmg: @wepdmg, stats: @stats, commonality: @commonality,
                    level: @level, loot: @loot, status_effects: @status_effects,
                    description: @description}
   end
+  def attributes
+    @attributes
+  end
   def died
-    $dungeon_room_list[($dungeon.get_room_of($player))-1].clear(self.name, Roll.gold(self.loot))#<<For the death flavor text.
+    $dungeon_room_list[($dungeon.get_room_of($player))-1].clear(@attributes[:name], Roll.gold(@attributes[:loot]))#<<For the death flavor text.
 #    $player.gain_xp(2)#*monster level
   end
   def hits(target)
-    damage = Roll.damage(self.attributes[:wepdmg])
+    damage = Roll.damage(@attributes[:wepdmg])
     puts "The monster hits you for #{damage} points of damage."
     target.TakeDmg(damage)
   end
@@ -28,12 +31,15 @@ class FrogLizard < Monster
     @ac                       = 8
     @bab                      = 0
     @maxhp                    = 10
+    @hp                       = @maxhp
+    puts "Set hp"
     @wepdmg                   = [1, 3]
     @stats                    = {str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8}
     @commonality              = 100
     @level                    = 1
     @loot                     = [2, 5, :copper]
     @description              = "Its a lizard that is also a frog."
+    attributes_are
   end
 end
 

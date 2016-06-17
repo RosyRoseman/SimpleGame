@@ -21,7 +21,7 @@ class Combat
         if $player.alive? && @monster.alive?
           if Roll.to_hit?($player, @monster); @weapon.hits(@monster) end
           if @monster.alive?
-            puts "It's at #{@monster.hp}"
+            puts "It's at #{@monster.attributes[:hp]}"
             if Roll.to_hit?(@monster, $player); @monster.hits($player) end
           else
             puts "He's dead jim."
@@ -48,18 +48,21 @@ module Combatable
   def status_start
     @status_effects = {debuff: FALSE, petrified: FALSE, poisoned: FALSE, asleep: FALSE, frozen: FALSE, confused: FALSE}
   end
+
   def alive?
-    @attributes[:hp] > 0
+    self.attributes[:hp] > 0
   end
   def TakeDmg(amount)
     @attributes[:hp] -= amount
+    puts "#{@attributes[:hp]}"
+    puts "#{self.attributes[:hp]}"
   end
   def HealDmg(amount)
     @attributes[:hp] += amount
     @attributes[:hp] = [@attributes[:hp], @attributes[:maxhp]].min
   end
   def debuff(stat, amount)
-    @attributes[:status_effects][:debuff] = [TRUE, {stat, amount}]
+    @attributes[:status_effects][:debuff] = [TRUE, {stat =>  amount}]
     @attributes[:stats][stat] -= amount
   end
   def remove_debuff(stat)
@@ -69,7 +72,7 @@ module Combatable
        unless @attributes[:status_effects][:debuff][1]
          @attributes[:status_effects][:debuff] = FALSE
        end
-    elsif @attributes[:status_effects][:debuff] != FALSE && not @attributes [:status_effects][:debuff][1][stat]
+    elsif @attributes[:status_effects][:debuff] != FALSE
        puts "That attribute isnt debuffed at the moment."
     else
        puts "You aren't suffering any debuffs at the moment."

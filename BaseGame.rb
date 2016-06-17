@@ -56,7 +56,7 @@ class Game
          combat = Combat.new
          combat.fight_monster(@room_is[:content][0])
       elsif Item === (@room_is[:content][0])
-        puts "You want to attack a #{(@room_is[:content][0]).name}? I think not."
+        puts "You want to attack a #{(@room_is[:content][0]).attributes[:name]}? I think not."
       else
         puts "Error: Content is neither monster nor item. #{@room_is[:content][0]}"
       end

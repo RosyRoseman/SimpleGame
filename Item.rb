@@ -1,8 +1,11 @@
 class Item
 attr_accessor :attributes
-  def attributes
-    @item_attributes = {name: @name, weight: @weight, rarity: @rarity, value: @value,
+  def attributes_are
+    @attributes = {name: @name, weight: @weight, rarity: @rarity, value: @value,
                         damage: @damage}
+  end
+  def attributes
+    @attributes
   end
 end
 #########################################
@@ -50,8 +53,8 @@ require './Potions'
 class Weapon < Item
 include Equipable
   def hits(target)
-    hits_for = Roll.damage(@damage)
-    puts "You hit the monster with your #{self.name.downcase} for #{hits_for}."
+    hits_for = Roll.damage(@attributes[:damage])
+    puts "You hit the monster with your #{self.attributes[:name]} for #{hits_for}."
     target.TakeDmg(hits_for)
   end
 end
