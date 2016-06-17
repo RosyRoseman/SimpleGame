@@ -84,7 +84,7 @@ class Room
 
   def get_content
 #    Roll.item(30, 100)
-    [[[FrogLizard, LizardFrog, GiantSpider, Shadeling, Spider, StoneGolem].sample, Roll.item(1, 100)].sample.new]
+    [[[FrogLizard, LizardFrog, GiantSpider, Shadeling, Spider, StoneGolem, Skeleton].sample, Roll.item(1, 100)].sample.new]
   end
 
   def get_size
