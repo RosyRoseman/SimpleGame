@@ -6,7 +6,6 @@ class Player
 
   def initialize
     Inventory.new
-    status_start
     @name                     = "Player"
     @ac                       = 10
     @bab                      = 0
@@ -23,6 +22,7 @@ class Player
     @attributes = {name: @name, ac: @ac, bab: @bab, hp: @hp, maxhp: @maxhp,
                    wepdmg: @wepdmg, stats: @stats, level: @level,
                    status_effects: @status_effects, description: @description}
+                   status_start
   end
   def attributes
     @attributes
