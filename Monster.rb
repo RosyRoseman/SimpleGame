@@ -8,6 +8,7 @@ class Monster
                    wepdmg: @wepdmg, stats: @stats, commonality: @commonality,
                    level: @level, loot: @loot, status_effects: @status_effects,
                    description: @description}
+                   status_start
   end
   def attributes
     @attributes
@@ -26,7 +27,6 @@ end
 
 class FrogLizard < Monster
   def initialize
-    status_start
     @name                     = "Frog Lizard"
     @ac                       = 8
     @bab                      = 0
