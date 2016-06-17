@@ -3,6 +3,7 @@ def initialize
   @name = "Bludgeon"
   @weight = 1
   @damage = [1, 6]
+  attributes_are
 end
 end
 
@@ -24,8 +25,56 @@ end
 
 class PointyStick < Weapon
   def initialize
-    @name = "Pointy Sword"
+    @name = "Pointy Stick"
     @weight = 1
     @damage = [1, 2]
+  end
+end
+
+class LongSword < Weapon
+  def initialize
+    @name = "Longsword"
+    @weight = 2
+    @damage = [1, 8]
+  end
+end
+
+class Hatchet < Weapon
+  def initialize
+    @name = "Hatchet"
+    @weight = 1
+    @damage = [2, 5]
+  end
+end
+
+class Dagger < Weapon
+  def initialize
+    @name = "Dagger"
+    @weight = 1
+    @damage = [1, 4]
+  end
+end
+
+class Butterknife < Weapon
+  def initialize
+    @name = "Butter knife"
+    @weight = 1
+    @damage = [1, 2]
+  end
+end
+
+class Spear < Weapon
+  def initialize
+    @name = "Spear"
+    @weight = 2
+    @damage = [2, 6]
+  end
+end
+
+class FryingPan < Weapon
+  def initialize
+    @name = "Frying Pan"
+    @weight = 1
+    @damage = [2, 3]
   end
 end

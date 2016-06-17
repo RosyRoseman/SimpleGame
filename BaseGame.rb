@@ -28,13 +28,13 @@ class Game
 ##############################################
   def refresh_world
     @room                          = $dungeon_room_list[$dungeon.get_room_of($player)-1]
-    @room_is                       = @room.get_room_is
+    @attributes                    = @room.attributes
   end
   def take_action(action)
     case action
     when :forward
-#      if @room_is[:content] && Monster === @room_is[:content][0] && @room_is[:content][0].alive?
-#        puts "You can't seem to get around the #{(@room_is[:content][0]).name}"
+#      if @attributes[:content] && Monster === @attributes[:content][0] && @attributes[:content][0].alive?
+#        puts "You can't seem to get around the #{(@attributes[:content][0]).name}"
 #      else
         if @room == $dungeon_room_list.last
           $dungeon_room_list          << Room.new
@@ -52,25 +52,25 @@ class Game
     when :status
       $player.print_player_status
     when :attack
-      if Monster === (@room_is[:content][0])
+      if Monster === (@attributes[:content][0])
          combat = Combat.new
-         combat.fight_monster(@room_is[:content][0])
-      elsif Item === (@room_is[:content][0])
-        puts "You want to attack a #{(@room_is[:content][0]).name}? I think not."
+         combat.fight_monster(@attributes[:content][0])
+      elsif Item === (@attributes[:content][0])
+        puts "You want to attack a #{(@attributes[:content][0]).attributes[:name]}? I think not."
       else
-        puts "Error: Content is neither monster nor item. #{@room_is[:content][0]}"
+        puts "Error: Content is neither monster nor item. #{@attributes[:content][0]}"
       end
     when :inventory
       Inventory.print_inventory
     when :use_item
-      Inventory.use(@room_is[:content][0])
+      Inventory.use(@attributes[:content][0])
     when :take
-      case @room_is[:content][0]
-      when Potion; @room_is[:content][0].found
+      case @attributes[:content][0]
+      when Potion; @attributes[:content][0].found
       when Garbage; puts "You really don't need to pick that up."
       when Monster; puts "Yeah, maybe kill it first, before you try and put it in your pocket..."
-      when :dead_monster; puts "You turn over the corpse and rustle around in its pockets for #{@room_is[:content][2][0]}"
-      else puts "This is wrong, tell the developers that you tried to pick up a #{@room_is[:content][0]}"
+      when :dead_monster; puts "You turn over the corpse and rustle around in its pockets for #{@attributes[:content][2][0]}"
+      else puts "This is wrong, tell the developers that you tried to pick up a #{@attributes[:content][0]}"
       end
     end
   end

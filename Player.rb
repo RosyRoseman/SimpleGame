@@ -2,31 +2,42 @@ require './Combat'
 
 class Player
   include Combatable
-  attr_accessor
+  attr_accessor :attributes
 
   def initialize
-    initialize_stats({maxHP: 20, WepDmg: [1,6]})
     Inventory.new
-
+    @name                     = "Player"
+    @ac                       = 10
+    @bab                      = 0
+    @maxhp                    = 20
+    @hp                       = @maxhp
+    @stats                    = {str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8}
+    @level                    = 1
+    @description              = "You."
+    attributes_are
     puts 'Player Initialized'
+  end
+
+  def attributes_are
+    @attributes = {name: @name, ac: @ac, bab: @bab, hp: @hp, maxhp: @maxhp,
+                   wepdmg: @wepdmg, stats: @stats, level: @level,
+                   status_effects: @status_effects, description: @description}
+                   status_start
+  end
+  def attributes
+    @attributes
   end
 
   def print_player_status
     puts "*" * 80
-    puts "HP: #{@HP}/10"
-    puts "Your 'weapon' deals #{@WepDmg} damage."
+    puts "HP: #{@hp}/#{@maxhp}"
+    puts "Your #{$equipped[:weapon].attributes[:name]} deals #{($equipped[:weapon].attributes[:damage])} damage."
     puts "*" * 80
   end
 
   def died
-    @room_is = $dungeon_room_list[$dungeon.get_room_of($player)-1].get_room_is
-    puts "Shit fam, you died fighting a #{@room_is[:content].name}"
+    @attributes = $dungeon_room_list[$dungeon.get_room_of($player)-1].attributes
+    puts "Shit fam, you died fighting a #{@attributes[:content].name}"
     exit
-  end
-  def bonus_to_hit
-    2
-  end
-  def ac
-    10
   end
 end

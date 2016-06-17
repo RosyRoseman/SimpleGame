@@ -2,7 +2,7 @@ class Inventory
 attr_accessor :equiped
   def initialize
     @starting_weapon = Bludgeon.new
-    $inventory = {bludgeon: {is: [@starting_weapon], weighs: @starting_weapon.weight}}
+    $inventory = {bludgeon: {is: [@starting_weapon]}}
     $equipped = {weapon: @starting_weapon}
   end
 
@@ -12,7 +12,7 @@ attr_accessor :equiped
        if $inventory.include?(thing)
           $inventory[thing][:is] << item
        else
-          $inventory[thing] = {is: [item], weighs: item.weight}
+          $inventory[thing] = {is: [item]}
        end
        puts "You put the #{thing} in your inventory."
      else
@@ -23,7 +23,8 @@ attr_accessor :equiped
     puts "What item would you like to use?"
     print_inventory
     input = Parser.get_specific($inventory.keys)
-    $inventory[input][:is].first.use(target)
+    $inventory[input][:is].pop.use(target)
+    unless $inventory[input][:is].any?; then $inventory.delete(input) end 
   end
   def self.equip(item)
     $equipped[item.class] = item

@@ -11,7 +11,6 @@ class Dungeon
 
   def initialize
     puts "Dungeon Initialized."
-    puts "Set player flag to 'in dungeon'"
     enter_dungeon
     $dungeon_room_list  = [Room.new]
   end
@@ -49,32 +48,33 @@ end
 
 ######################################################
 class Room
-  attr_accessor :room_is
+  attr_accessor :attributes
 
   def initialize
     puts "Creating Room..."
-    @room_is           = {size: get_size, adjetive: get_adjetive, type: get_room_type,
-                          content: get_content, room_number: get_new_room_number}
+    attributes_are
     puts "New room created"
   end
-
-  def get_room_is
-    @room_is
+  def attributes_are
+    @attributes           = {size: get_size, adjetive: get_adjetive, type: get_room_type,
+                          content: get_content, room_number: get_new_room_number}
+  end
+  def attributes
+    @attributes
   end
 
   def print_room_status
-    @room_is = self.get_room_is
-    puts "You are in room number #{@room_is[:room_number]}."
-    puts "You are in a #{@room_is[:adjetive]} room, that is roughly #{@room_is[:size]}."
-    unless @room_is[:content][0].is_a? Symbol
-      puts "Inside you find a #{(@room_is[:content][0]).name}! Oh Shit!"
+    puts "You are in room number #{@attributes[:room_number]}."
+    puts "You are in a #{@attributes[:adjetive]} room, that is roughly #{@attributes[:size]}."
+    unless @attributes[:content][0].is_a? Symbol
+      puts "Inside you find a #{(@attributes[:content][0]).attributes[:name]}! Oh Shit!"
     else
-      puts "Inside is now #{@room_is[:content][1]}"
+      puts "Inside is now #{@attributes[:content][1]}"
     end
   end
 
   def clear(monster, loot)
-    @room_is[:content] = [:dead_monster, "a dead #{monster}",  loot]
+    @attributes[:content] = [:dead_monster, "a dead #{monster}",  loot]
   end
   private
 
@@ -84,7 +84,7 @@ class Room
 
   def get_content
 #    Roll.item(30, 100)
-    [[[FrogLizard, LizardFrog, GiantSpider, Shadeling, Spider, StoneGolem].sample.new, Roll.item(1, 100)].sample]
+    [[[FrogLizard, LizardFrog, GiantSpider, Shadeling, Spider, StoneGolem].sample, Roll.item(1, 100)].sample.new]
   end
 
   def get_size
