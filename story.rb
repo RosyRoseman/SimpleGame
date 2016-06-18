@@ -53,10 +53,11 @@ class Story
   def self.death_message(deceased)
     Story.say_green("The #{deceased.attributes[:name]} is dead, Jim.")
     Story.say_green("Take its #{deceased.attributes[:loot].attributes[:name]}.")
+    $player.attributes[:exp] += deceased.attributes[:exp]
   end
 
   def self.fourohfour
-    Story.say_yellow("This functionality hasn't been implimented yet... Sucks dude, we know.")
+    Story.say_yellow("This functionality hasn't been implimented yet... Sucks dude, we know.", 0.04)
   end
 
   def self.say_red(string, speed = 0.02)

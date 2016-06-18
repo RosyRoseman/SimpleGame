@@ -42,6 +42,7 @@ class Player
     puts "*" * 80
     puts "HP: #{@attributes[:hp]}/#{@attributes[:maxhp]}"
     puts "Your #{self.equipped[:Weapon].attributes[:name]} deals #{(self.equipped[:Weapon].attributes[:damage])} damage."
+    puts "You are at level #{@attributes[:level]}, with #{@attributes[:exp]} EXP."
     puts "*" * 80
     @attributes[:inventory].print_equipped
   end
@@ -64,7 +65,7 @@ class Player
 
   def level_up
     @attributes[:level] += 1
-    Story.say_slow("Congratulations or reaching level #{@attributes[:level]}!", blue)
+    Story.say_blue("Congratulations or reaching level #{@attributes[:level]}!", 0.04)
   end
 
 end
