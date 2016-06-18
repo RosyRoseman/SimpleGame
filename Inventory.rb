@@ -45,28 +45,32 @@ class Inventory
     puts "What item would you like to use?"
     print_inventory
     input = Parser.get_specific(@inventory.keys)
-    if @inventory[input].last.attributes[:usable] = TRUE
-      @inventory[input].pop.use
-    else
-      puts "This item cant be used."
-    end
+    if @inventory[input] && @inventory[input].last.attributes[:usable]
+       @inventory[input].pop.use
+     elsif @inventory[input]
+       puts "This item cant be used."
+     else
+       puts ""
+     end
   end
 
   def use_combat(target)
     puts "What item would you like to use?"
     print_inventory
     input = Parser.get_specific(@inventory.keys)
-    if @inventory[input].first.attributes[:usable] = TRUE
+    if @inventory[input] && @inventory[input].first.attributes[:usable]
       @inventory[input].pop.use_c(target)
-    else
+    elsif @inventory[input]
       puts "This item cant be used."
+    else
+      puts "cancelled"
     end
   end
 
   def add(thing) #to inventory
     if thing.class.ancestors.include? Item
       item = thing.class.to_s.downcase.to_sym
-        if @inventory.include?(item)
+        if @inventory[input].include?(item)
            @inventory[item] << thing
         else
           @inventory[item] = [thing]
