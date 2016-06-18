@@ -64,11 +64,11 @@ class Combat
     when :run
       run
     when :use_item
-      $player.inventory.use_combat(@enemy)
+      $player.attributes[:inventory].use_combat(@enemy)
     when :status
       $player.status
     when :inventory
-      $player.inventory.print_inventory
+      $player.attributes[:inventory].print_inventory
     end
   end
 end
