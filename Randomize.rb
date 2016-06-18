@@ -23,14 +23,14 @@ class Roll
   end
 
   def self.to_hit?(target, source)
-    puts "#{source.attributes[:name]} is attacking #{target.attributes[:name]}"
+#    puts "#{source.attributes[:name]} is attacking #{target.attributes[:name]}"
     roll = rand(1..20)
     unless target.attributes[:ac] then puts "auto-hit -no ac" and return TRUE end
     if target.attributes[:ac] && roll + source.attributes[:bab] >= target.attributes[:ac]
-      puts "#{source.attributes[:name]} hits!"
+      Story.say("#{source.attributes[:name]} hits!")
       return TRUE
     elsif target.attributes[:ac] && roll + source.attributes[:bab] < target.attributes[:ac]
-      puts "#{source.attributes[:name]} misses..."
+      Story.say("#{source.attributes[:name]} misses...")
       return FALSE
     else
       puts "auto-hit -else"

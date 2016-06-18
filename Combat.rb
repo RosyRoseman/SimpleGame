@@ -19,7 +19,9 @@ class Combat
     Roll.initiative(@enemy)
     fight
       while @enemy.alive? && $player.alive?
-        take_action(Parser.get_input(COMBAT_ACTIONS))
+        action = Parser.get_input(COMBAT_ACTIONS)
+        system("clear")
+        take_action(action)
         effect_trigger
       end
     Story.death_message(@enemy)

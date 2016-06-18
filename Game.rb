@@ -17,7 +17,9 @@ class Game
   ###############GAME LOOP###################
   while $player.alive?
       refresh
-      take_action(Parser.get_input(ACTIONS))
+      action = Parser.get_input(ACTIONS)
+      system("clear")
+      take_action(action)
       refresh
     end
     puts "GAME OVER"

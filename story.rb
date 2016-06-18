@@ -13,24 +13,24 @@ class Story
 #      sleep(2)
 #      puts "...and glory, wealth, and fame beyond your wildest dreams."
 #      sleep(2)
+=begin
       100.times do
         string = []
         100.times {string << [0, 1].sample}
         puts "#{string.join.to_s}"
         sleep(0.01)
       end
-      sleep(1)
+=end
       system("clear")
-      sleep(1)
-      text = "Do you dare enter this dungeon?".chars
-      text.each {|e| print "#{e}"; sleep(0.05)}
       sleep(0.75)
+      Story.say_slow("Do you dare enter this dungeon?")
+      sleep(0.5)
       puts ""
       while true
       input = Parser.get_input([:yes, :no])
         if input == :yes
           $dungeon = Dungeon.new
-          puts "Remember to type Help if you ever dont know what to do!"
+          Story.say_slow("Remember to type Help if you ever dont know what to do!")
           break
         elsif input == :no
           puts "Well alright then, no treasure for you!"
@@ -44,16 +44,27 @@ class Story
   end
 
   def self.enter_dungeon
-    puts "You step inside the entrance to the dungeon."
+    Story.say_slow("You step inside the entrance to the dungeon.")
   end
 
   def self.death_message(deceased)
-    puts "The #{deceased.attributes[:name]} is dead, Jim."
-    puts "Take its #{deceased.attributes[:loot].attributes[:name]}."
+    Story.say("The #{deceased.attributes[:name]} is dead, Jim.")
+    Story.say("Take its #{deceased.attributes[:loot].attributes[:name]}.")
   end
 
   def self.fourohfour
-    puts "This functionality hasn't been implimented yet... Sucks dude, we know."
+    Story.say("This functionality hasn't been implimented yet... Sucks dude, we know.")
   end
 
+  def self.say_slow(string)
+    array = string.chars
+    array.each {|e| print "#{e}"; sleep(0.04)}
+    puts ""
+  end
+
+  def self.say(string)
+    array = string.chars
+    array.each {|e| print "#{e}"; sleep(0.02)}
+    puts ""
+  end
 end
