@@ -53,7 +53,6 @@ end
 
 
 
-
 =begin
 def initialize
   @attributes = {
@@ -68,5 +67,5 @@ def initialize
     loot:               Roll.item,
     description:
   }
-end
+
 =end
