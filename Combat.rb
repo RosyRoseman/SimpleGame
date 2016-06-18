@@ -47,13 +47,13 @@ class Combat
 
   def player_hits
     if Roll.to_hit?(@enemy, $player)
-       @enemy.take_damage($player)
+       @enemy.take_damage($player.equipped[:weapon].attributes[:damage])
      end
   end
 
   def monster_hits
     if Roll.to_hit?($player, @enemy)
-      $player.take_damage(@enemy)
+      $player.take_damage(@enemy.attributes[:damage])
     end
   end
 
@@ -90,10 +90,8 @@ module Combatable
     @attributes[:hp] > 0
   end
 
-  def take_damage(hitter)
-    if hitter == $player; power = $player.equipped[:weapon].attributes[:damage]
-    else power = hitter.attributes[:damage] end
-    damage = Roll.damage(power)
+  def take_damage(amount)
+    damage = Roll.damage(amount)
     @attributes[:hp] -= damage
     @attributes[:hp] = [@attributes[:hp], 0].max
   end
