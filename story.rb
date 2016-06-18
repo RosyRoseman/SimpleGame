@@ -13,8 +13,19 @@ class Story
 #      sleep(2)
 #      puts "...and glory, wealth, and fame beyond your wildest dreams."
 #      sleep(2)
-
-      puts "Do you dare enter this dungeon?"
+      100.times do
+        string = []
+        100.times {string << [0, 1].sample}
+        puts "#{string.join.to_s}"
+        sleep(0.01)
+      end
+      sleep(1)
+      system("clear")
+      sleep(1)
+      text = "Do you dare enter this dungeon?".chars
+      text.each {|e| print "#{e}"; sleep(0.05)}
+      sleep(1.5)
+      puts ""
       while true
       input = Parser.get_input([:yes, :no])
         if input == :yes
