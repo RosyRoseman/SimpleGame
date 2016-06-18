@@ -32,4 +32,17 @@ class Story
       end
   end
 
+  def self.enter_dungeon
+    puts "You step inside the entrance to the dungeon."
+  end
+
+  def self.death_message(deceased)
+    puts "The #{deceased.attributes[:name]} is dead, Jim."
+    puts "Take its #{deceased.attributes[:loot].attributes[:name]}."
+  end
+
+  def self.fourohfour
+    puts "This functionality hasn't been implimented yet... Sucks dude, we know."    
+  end
+
 end
