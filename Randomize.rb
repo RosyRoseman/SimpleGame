@@ -1,8 +1,18 @@
 class Roll
-GARBAGE                 = [Garbage, PointyStick, Butterknife]
-COMMON                  = [HealthPotion, Dagger]
-UNCOMMON                = [ShortSword, Hatchet, FryingPan]
-RARE                    = [FirePotion, LongSword, Spear]
+
+  def self.room
+    @choice = Array.new
+    Room.descendants.each do |x|
+        do_times = x.commonality
+        do_times.times {@choice << x}
+    end
+    @choice.sample.new
+  end
+
+  def self.initiative(enemy)
+    enemy.attributes[:initiative] = 0
+    $player.attributes[:initiative] = 1
+  end
 
   def self.damage(dmgarray)
     damage = Array.new
@@ -12,33 +22,40 @@ RARE                    = [FirePotion, LongSword, Spear]
     damage = damage.inject(:+)
   end
 
-  def self.item(low, high)
-    found = case rand(low..high)
-    when (86..100);          RARE
-    when (66..85);           UNCOMMON
-    when (41..65);           COMMON
-    when (1..40);            GARBAGE
-    end
-    found.sample
-  end
-
-  def self.gold(range)
-    change = rand(range[0]..range[1])
-    string = "#{change.to_s} #{range[2].to_s}"
-    return [string, change, :copper]
-  end
-
   def self.to_hit?(target, source)
+    puts "#{source.attributes[:name]} is attacking #{target.attributes[:name]}"
     roll = rand(1..20)
     unless target.attributes[:ac] then puts "auto-hit -no ac" and return TRUE end
     if target.attributes[:ac] && roll + source.attributes[:bab] >= target.attributes[:ac]
+      puts "#{source.attributes[:name]} hits!"
       return TRUE
     elsif target.attributes[:ac] && roll + source.attributes[:bab] < target.attributes[:ac]
-      puts "miss..."
+      puts "#{source.attributes[:name]} misses..."
       return FALSE
     else
       puts "auto-hit -else"
       return TRUE
     end
   end
+
+  def self.item
+    @choice = []
+    Item.descendants.each do |x|
+      if x.respond_to?(:primary)
+        do_times = x.new.attributes[:commonality]
+        do_times.times {@choice << x}
+      end
+    end
+    @choice.sample.new
+  end
+
+  def self.monster
+    @choice = []
+    Monster.descendants.each do |x|
+        do_times = x.commonality
+        do_times.times {@choice << x}
+    end
+    @choice.sample.new
+  end
+
 end

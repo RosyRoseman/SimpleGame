@@ -1,80 +1,61 @@
-class Bludgeon < Weapon
+class Weapon < Item
+
+end
+########################################################
+class Bludgeon < Item
+  def initialize
+    @attributes = {
+      name:             "Bludgeon",
+      weight:           1,
+      damage:           [1,6],
+      commonality:      4
+    }
+  end
+end
+
+class ShortSword < Item
+  def initialize
+    @attributes = {
+      name:             "Short sword",
+      weight:           1,
+      damage:           [2,4],
+      commonality:      4
+    }
+  end
+end
+
+class Banana < Item
+  def initialize
+    @attributes = {
+      name:             "Banana",
+      weight:           1,
+      damage:           [4,8],
+      commonality:      2
+    }
+  end
+end
+
+class Hatchet < Item
+  def initialize
+    @attributes = {
+      name:             "Hatchet",
+      weight:           1,
+      damage:           [2,6],
+      commonality:      4
+    }
+  end
+end
+
+
+=begin
 def initialize
-  @name = "Bludgeon"
-  @weight = 1
-  @damage = [1, 6]
-  attributes_are
-end
-end
-
-class ShortSword < Weapon
-  def initialize
-    @name = "Short Sword"
-    @weight = 1
-    @damage = [2, 4]
-  end
+  @attributes = {
+    name:             ,
+    weight:           ,
+    damage:           ,
+    commonality:
+  }
 end
 
-class Banana < Weapon
-  def initialize
-    @name = "Banana"
-    @weight = 1
-    @damage = [2, 8]
-  end
-end
 
-class PointyStick < Weapon
-  def initialize
-    @name = "Pointy Stick"
-    @weight = 1
-    @damage = [1, 2]
-  end
-end
-
-class LongSword < Weapon
-  def initialize
-    @name = "Longsword"
-    @weight = 2
-    @damage = [1, 8]
-  end
-end
-
-class Hatchet < Weapon
-  def initialize
-    @name = "Hatchet"
-    @weight = 1
-    @damage = [2, 5]
-  end
-end
-
-class Dagger < Weapon
-  def initialize
-    @name = "Dagger"
-    @weight = 1
-    @damage = [1, 4]
-  end
-end
-
-class Butterknife < Weapon
-  def initialize
-    @name = "Butter knife"
-    @weight = 1
-    @damage = [1, 2]
-  end
-end
-
-class Spear < Weapon
-  def initialize
-    @name = "Spear"
-    @weight = 2
-    @damage = [2, 6]
-  end
-end
-
-class FryingPan < Weapon
-  def initialize
-    @name = "Frying Pan"
-    @weight = 1
-    @damage = [2, 3]
-  end
-end
+=end

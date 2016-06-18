@@ -27,7 +27,7 @@ class Parser
          puts "That command wont work here... #{input} #{options}"
        end
      end
-     breakout_commands(input)
+     breakout_commands(input, options)
    end
    return input
  end
@@ -45,7 +45,7 @@ class Parser
           puts "That command wont work here..."
         end
       end
-      breakout_commands(parse)
+      breakout_commands(parse, options)
     end
     return @parse
   end
@@ -60,7 +60,7 @@ class Parser
     @parse
   end
 
-  def self.breakout_commands(input)
+  def self.breakout_commands(input, options)
     case input
     when :quit
       exit

@@ -1,43 +1,38 @@
-require './Combat'
-
 class Player
   include Combatable
   attr_accessor :attributes
 
   def initialize
-    Inventory.new
-    @name                     = "Player"
-    @ac                       = 10
-    @bab                      = 0
-    @maxhp                    = 20
-    @hp                       = @maxhp
-    @stats                    = {str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8}
-    @level                    = 1
-    @description              = "You."
-    attributes_are
-    puts 'Player Initialized'
-  end
-
-  def attributes_are
-    @attributes = {name: @name, ac: @ac, bab: @bab, hp: @hp, maxhp: @maxhp,
-                   wepdmg: @wepdmg, stats: @stats, level: @level,
-                   status_effects: @status_effects, description: @description}
-                   status_start
+    status_start
+    @attributes = {
+                    inventory:       Inventory.new,
+                    name:            "Player",
+                    ac:              10,
+                    bab:             0,
+                    maxhp:           20,
+                    hp:              20,
+                    stats:           {str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8},
+                    level:           1,
+                    status_effects:  @status_effects,
+                    location:        :dungeon_entrance,
+                    room:            -1
+                    }
   end
   def attributes
     @attributes
   end
-
-  def print_player_status
-    puts "*" * 80
-    puts "HP: #{@hp}/#{@maxhp}"
-    puts "Your #{$equipped[:weapon].attributes[:name]} deals #{($equipped[:weapon].attributes[:damage])} damage."
-    puts "*" * 80
+  def inventory
+    @attributes[:inventory].inventory
+  end
+  def equipped
+    @attributes[:inventory].equipped
   end
 
-  def died
-    @attributes = $dungeon_room_list[$dungeon.get_room_of($player)-1].attributes
-    puts "Shit fam, you died fighting a #{@attributes[:content].name}"
-    exit
+  def status
+    puts "*" * 80
+    puts "HP: #{@attributes[:hp]}/#{@attributes[:maxhp]}"
+    puts "Your #{self.equipped[:weapon].attributes[:name]} deals #{(self.equipped[:weapon].attributes[:damage])} damage."
+    puts "*" * 80
+    @inventory.print_equipped
   end
 end

@@ -1,104 +1,76 @@
-class World
-
-  def initialize
-    puts 'World Initialized'
-  end
-
-end
-
-#######################################################
+#Must add Roll.room
 class Dungeon
 
   def initialize
-    puts "Dungeon Initialized."
+    $dungeon_map = [Roll.room]
     enter_dungeon
-    $dungeon_room_list  = [Room.new]
   end
 
   def enter_dungeon
-    puts "You are standing at the entrance of the dungeon"
-    puts "Would you like to go inside?"
-    input = Parser.get_input([:yes, :no])
-    if input == :yes
-      set_current_room_to(1)
-      puts "You step inside the entrance."
+    Story.enter_dungeon
+    move_player(0)
+  end
+
+  def forward
+#    if Monster === $player.attributes[:location][:content] && $player.attributes[:location][:content].alive?
+#      puts "You can't just jetpack away from your problems, Brian!"
+    if $player.attributes[:location] == $dungeon_map.last
+      $dungeon_map << Roll.room
+      move_player(:forward)
     else
-      set_current_room_to(0)
-      puts "You decide its best not, and head back from whence you came."
+      move_player(:forward)
     end
   end
 
-  def player_forward
-    @current_room += 1
+  def backward
+    if $player.attributes[:location] == $dungeon_map.first
+      Story.leave_dungeon
+      $player.attributes[:location] = :dungeon_entrance
+    else
+      move_player(:backward)
+    end
   end
 
-  def player_backward
-    @current_room -= 1
+  def move_player(arg)
+      case arg
+      when :forward
+        $player.attributes[:room] +=1
+      when :backward
+        $player.attributes[:room] -=1
+      when Integer
+        $player.attributes[:room] = arg
+      end
+      $player.attributes[:location] = $dungeon_map[$player.attributes[:room]]
   end
-
-  def get_room_of(entity)
-    @current_room
-  end
-
-  def set_current_room_to(room_number)
-    @current_room = room_number
-  end
-
 end
-
-######################################################
+###############################################################################
 class Room
   attr_accessor :attributes
-
-  def initialize
-    puts "Creating Room..."
-    attributes_are
-    puts "New room created"
-  end
-  def attributes_are
-    @attributes           = {size: get_size, adjetive: get_adjetive, type: get_room_type,
-                          content: get_content, room_number: get_new_room_number}
-  end
   def attributes
     @attributes
   end
 
-  def print_room_status
+  def self.descendants
+    ObjectSpace.each_object(Class).select { |klass| klass < self }
+  end
+
+  def status
     puts "You are in room number #{@attributes[:room_number]}."
     puts "You are in a #{@attributes[:adjetive]} room, that is roughly #{@attributes[:size]}."
-    unless @attributes[:content][0].is_a? Symbol
-      puts "Inside you find a #{(@attributes[:content][0]).attributes[:name]}! Oh Shit!"
+    puts "Inside you see a #{@attributes[:content].attributes[:name]}."
+  end
+
+  def loot
+    if Item === @attributes[:content] || !@attributes[:content].alive?
+      if @attributes[:loot] #|| @attributes[:content].attributes[:loot]
+         $player.attributes[:inventory].add(@attributes[:loot])
+         @attributes[:loot] = :gone
+      elsif @attributes[:loot] == :gone
+        puts "You have already looted this room. Stupid."
+      else puts "error: What the Fuck?"
+      end
     else
-      puts "Inside is now #{@attributes[:content][1]}"
+      puts "Maybe try killing the monster before you take its stuff..."
     end
-  end
-
-  def clear(monster, loot)
-    @attributes[:content] = [:dead_monster, "a dead #{monster}",  loot]
-  end
-  private
-
-  def get_new_room_number
-    $dungeon_room_list.length
-  end
-
-  def get_content
-#    Roll.item(30, 100)
-    [[[FrogLizard, LizardFrog, GiantSpider, Shadeling, Spider, StoneGolem].sample, Roll.item(1, 100)].sample.new]
-  end
-
-  def get_size
-    dimensions = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 10, 10, 10,
-                 10, 10, 15, 15, 15, 20, 20, 40, 50, 75, 100, 200]
-    "#{dimensions.sample}'x#{dimensions.sample}'"
-  end
-
-  def get_adjetive
-    ["well-lit", "dim", "filthy", "suprisingly clean", "round", "muddy",
-     "oppressive", "dusty", "slimy"].sample
-  end
-
-  def get_room_type
-    "room type"
   end
 end
