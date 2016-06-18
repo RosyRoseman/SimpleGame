@@ -1,5 +1,5 @@
 class Parser
-  PERM_OPT        = [:quit, :help, :game_info]
+  PERM_OPT        = [:quit, :help, :game_info, :cancel]
   TAKE            = [:take, :loot, :t, :grab, :pick_up]
   INVENTORY       = [:inventory, :i]
   LOOK            = [:look, :l, :loo, :ook, :look_around]
@@ -28,6 +28,7 @@ class Parser
        end
      end
      breakout_commands(input, options)
+     if :break; break end
    end
    return input
  end
@@ -69,6 +70,8 @@ class Parser
     when :help
       puts "The game is looking for one of these commands right now: #{options}"
       puts "If this doesn't help, try our wiki! 'wiki wiki wak'..."
+    when :cancel
+      return :break
     end
   end
 
