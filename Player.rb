@@ -1,5 +1,6 @@
 class Player
   include Combatable
+  LEVEL_REQUIREMENTS  = [1, 50, 100, 200, 400, 800, 2000, 5000, 10000]
   attr_accessor :attributes
 
   def initialize
@@ -13,7 +14,8 @@ class Player
                     maxhp:           20,
                     hp:              20,
                     stats:           {str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8},
-                    level:           1,
+                    level:           0,
+                    exp:             0,
                     status_effects:  @status_effects,
                     location:        :dungeon_entrance,
                     room:            -1
@@ -33,6 +35,7 @@ class Player
     @attributes[:inventory].refresh
     armour_benefit
     @attributes[:ac] = @attributes[:baseac] + @protection
+    check_level
   end
 
   def status
@@ -51,6 +54,17 @@ class Player
       end
     end
     @protection = [total.inject(:+), 0].max
+  end
+
+  def check_level
+    if @attributes[:exp] >= LEVEL_REQUIREMENTS[@attributes[:level]]
+      level_up
+    end
+  end
+
+  def level_up
+    @attributes[:level] += 1
+    Story.say_slow("Congratulations or reaching level #{@attributes[:level]}!", blue)
   end
 
 end
