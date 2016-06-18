@@ -7,7 +7,7 @@ class Player
     @attributes = {
                     inventory:       Inventory.new,
                     name:            "Player",
-                    ac:              10,
+                    ac:              8,
                     bab:             0,
                     maxhp:           20,
                     hp:              20,

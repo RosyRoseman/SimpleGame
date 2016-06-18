@@ -77,7 +77,6 @@ def initialize
     equippable:       TRUE,
     type:             :weapon
   }
-  add_attributes
 end
 def self.prime
   TRUE
