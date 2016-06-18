@@ -24,6 +24,7 @@ class Frogzard < Monster
       level:              1,
       loot:               Roll.item,
       status_effects:     status_start,
+      exp:                5,
       description:        "Its a lizard that f@#cked a frog."
     }
   end
@@ -45,6 +46,7 @@ class Spider < Monster
       level:              1,
       loot:               Roll.item,
       status_effects:     status_start,
+      exp:                5,
       description:        "Its... just a spider, like, not even a big one."
     }
     status_start
@@ -69,6 +71,7 @@ def initialize
     level:              1,
     loot:               Roll.item,
     status_effects:     status_start,
+    exp:                ,
     description:
   }
 end
