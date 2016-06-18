@@ -8,25 +8,20 @@ open Terminal or Command prompt
 (without the < >)
 type <cd Desktop>
 type <cd SimpleGame>
-type <ruby BaseGame.rb>
+type <ruby Game.rb>
 
 ## Template for adding things
 # check this before adding stuff
 -Templates.rb
 
 ### Things to be worked on.
-- Roll.room_content
 - Flow combat with status effects
 - Make armor
-- Create basegame 'cleanup' function
 - Make inventory limit
 - Fix bug where total inventory counts different items and not total items, should I give each item a weight value?
 - Expand Item list
-- Module-ize items more? 'drinkable' 'throwable' 'wearable'? or stick more with inheritance?
 - Expand monster list
 - Expand room content randomizer
-- ~Better find item prompt~
-- Reduce 'world initialized' messages
 - Character creation, name and the like.
 - Death message
   - "Oh dear, it seems you are dead. Enjoy the afterlife!" (M)

@@ -8,8 +8,13 @@ class Bludgeon < Item
       name:             "Bludgeon",
       weight:           1,
       damage:           [1,6],
-      commonality:      4
+      commonality:      4,
+      equippable:       TRUE,
+      type:             :Weapon
     }
+  end
+  def self.prime
+    TRUE
   end
 end
 
@@ -19,8 +24,13 @@ class ShortSword < Item
       name:             "Short sword",
       weight:           1,
       damage:           [2,4],
-      commonality:      4
+      commonality:      4,
+      equippable:       TRUE,
+      type:             :Weapon
     }
+  end
+  def self.prime
+    TRUE
   end
 end
 
@@ -30,8 +40,13 @@ class Banana < Item
       name:             "Banana",
       weight:           1,
       damage:           [4,8],
-      commonality:      2
+      commonality:      2,
+      equippable:       TRUE,
+      type:             :Weapon
     }
+  end
+  def self.prime
+    TRUE
   end
 end
 
@@ -41,8 +56,13 @@ class Hatchet < Item
       name:             "Hatchet",
       weight:           1,
       damage:           [2,6],
-      commonality:      4
+      commonality:      4,
+      equippable:       TRUE,
+      type:             :Weapon
     }
+  end
+  def self.prime
+    TRUE
   end
 end
 
@@ -53,8 +73,13 @@ def initialize
     name:             ,
     weight:           ,
     damage:           ,
-    commonality:
+    commonality:      ,
+    equippable:       TRUE,
+    type:             :weapon
   }
+end
+def self.prime
+  TRUE
 end
 
 

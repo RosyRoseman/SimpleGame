@@ -23,6 +23,7 @@ class Frogzard < Monster
       stats:              {str: 8, dex: 8, con: 10, int: 1, wis: 4, cha: 1},
       level:              1,
       loot:               Roll.item,
+      status_effects:     status_start,
       description:        "Its a lizard that f@#cked a frog."
     }
   end
@@ -43,8 +44,10 @@ class Spider < Monster
       stats:              {str: 8, dex: 8, con: 10, int: 1, wis: 4, cha: 1},
       level:              1,
       loot:               Roll.item,
+      status_effects:     status_start,
       description:        "Its... just a spider, like, not even a big one."
     }
+    status_start
   end
   def self.commonality
     10
@@ -65,7 +68,9 @@ def initialize
     stats:              {str: 8, dex: 8, con: 10, int: 1, wis: 4, cha: 1},
     level:              1,
     loot:               Roll.item,
+    status_effects:     status_start,
     description:
   }
+end
 
 =end

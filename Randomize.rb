@@ -1,7 +1,7 @@
 class Roll
 
   def self.room
-    @choice = Array.new
+    @choice = []
     Room.descendants.each do |x|
         do_times = x.commonality
         do_times.times {@choice << x}
@@ -23,14 +23,14 @@ class Roll
   end
 
   def self.to_hit?(target, source)
-    puts "#{source.attributes[:name]} is attacking #{target.attributes[:name]}"
+#    puts "#{source.attributes[:name]} is attacking #{target.attributes[:name]}"
     roll = rand(1..20)
     unless target.attributes[:ac] then puts "auto-hit -no ac" and return TRUE end
     if target.attributes[:ac] && roll + source.attributes[:bab] >= target.attributes[:ac]
-      puts "#{source.attributes[:name]} hits!"
+      Story.say("#{source.attributes[:name]} hits!")
       return TRUE
     elsif target.attributes[:ac] && roll + source.attributes[:bab] < target.attributes[:ac]
-      puts "#{source.attributes[:name]} misses..."
+      Story.say("#{source.attributes[:name]} misses...")
       return FALSE
     else
       puts "auto-hit -else"
@@ -41,7 +41,7 @@ class Roll
   def self.item
     @choice = []
     Item.descendants.each do |x|
-      if x.respond_to?(:primary)
+      if x.respond_to?(:prime)
         do_times = x.new.attributes[:commonality]
         do_times.times {@choice << x}
       end

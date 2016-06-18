@@ -26,3 +26,4 @@ class Garbage < Item
 end
 require './Potions'
 require './Weapons'
+require './Armour'

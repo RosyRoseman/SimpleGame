@@ -19,7 +19,9 @@ class Combat
     Roll.initiative(@enemy)
     fight
       while @enemy.alive? && $player.alive?
-        take_action(Parser.get_input(COMBAT_ACTIONS))
+        action = Parser.get_input(COMBAT_ACTIONS)
+        system("clear")
+        take_action(action)
         effect_trigger
       end
     Story.death_message(@enemy)
@@ -47,7 +49,7 @@ class Combat
 
   def player_hits
     if Roll.to_hit?(@enemy, $player)
-       @enemy.take_damage($player.equipped[:weapon].attributes[:damage])
+       @enemy.take_damage($player.equipped[:Weapon].attributes[:damage])
      end
   end
 

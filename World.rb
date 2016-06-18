@@ -56,14 +56,14 @@ class Room
 
   def status
     content = @attributes[:content]
-    puts "You are in room number #{@attributes[:room_number]}."
-    puts "You are in a #{@attributes[:adjetive]} room, that is roughly #{@attributes[:size]}."
+    Story.say("You are in room number #{@attributes[:room_number]}.")
+    Story.say("You are in a #{@attributes[:adjetive]} room, that is roughly #{@attributes[:size]}.")
     if Monster === content && content.alive? || Item === content
-      puts "Inside you see a #{content.attributes[:name]}."
+      Story.say("Inside you see a #{content.attributes[:name]}.")
     elsif Monster === content && !content.alive?
-      puts "Inside you see a dead #{content.attributes[:name]}."
+      Story.say("Inside you see a dead #{content.attributes[:name]}.")
     else
-      puts "Look, I'm gonna level with you here, we have no clue what this #{content} is."
+      Story.say("Look, I'm gonna level with you here, we have no clue what this #{content} is.")
     end
   end
 
@@ -71,13 +71,14 @@ class Room
     if Item === @attributes[:content] || !@attributes[:content].alive?
       if @attributes[:loot] #|| @attributes[:content].attributes[:loot]
          $player.attributes[:inventory].add(@attributes[:loot])
+         Story.say("You take the #{@attributes[:loot].attributes[:name]}")
          @attributes[:loot] = :gone
       elsif @attributes[:loot] == :gone
-        puts "You have already looted this room. Stupid."
-      else puts "error: What the Fuck?"
+        Story.say("You have already looted this room. Stupid.")
+      else Story.say("Error: What the Fuck?")
       end
     else
-      puts "Maybe try killing the monster before you take its stuff..."
+      Story.say("Maybe try killing the monster before you take its stuff...")
     end
   end
 end

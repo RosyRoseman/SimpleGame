@@ -1,6 +1,6 @@
 require './Dependencies'
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item, :take]
+  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item, :take, :equip]
 
   def initialize
     $player = Player.new
@@ -8,7 +8,7 @@ class Game
   end
   def refresh
     @room = $player.attributes[:location]
-    $player.attributes[:inventory].refresh
+    $player.refresh
   end
   private
   def start_game
@@ -17,7 +17,9 @@ class Game
   ###############GAME LOOP###################
   while $player.alive?
       refresh
-      take_action(Parser.get_input(ACTIONS))
+      action = Parser.get_input(ACTIONS)
+      system("clear")
+      take_action(action)
       refresh
     end
     puts "GAME OVER"
@@ -47,6 +49,8 @@ def take_action(action) #Non-combat
     $player.attributes[:inventory].use
   when :take
     @room.loot
+  when :equip
+    $player.attributes[:inventory].equip
   end
 end
 $game = Game.new
