@@ -24,6 +24,7 @@ class Story
       system("clear")
       sleep(0.75)
       Story.say_slow("Do you dare enter this dungeon?")
+      system("say Do you dare enter?")
       sleep(0.5)
       puts ""
       while true
@@ -58,13 +59,13 @@ class Story
 
   def self.say_slow(string)
     array = string.chars
-    array.each {|e| print "#{e}"; sleep(0.04)}
+    array.each {|e| print "#{e}".red; sleep(0.04)}
     puts ""
   end
 
   def self.say(string)
     array = string.chars
-    array.each {|e| print "#{e}"; sleep(0.02)}
+    array.each {|e| print "#{e}".green; sleep(0.02)}
     puts ""
   end
 end
