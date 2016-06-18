@@ -2,11 +2,15 @@ class Combat
   COMBAT_ACTIONS = [:attack, :run, :use_item, :status, :inventory]
 
   def initialize(enemy)
-    if enemy.alive?
-      @enemy = enemy
-      combat_start
+    if enemy.respond_to?(:alive?)
+      if enemy.alive?
+        @enemy = enemy
+        combat_start
+      else
+        puts "Stop trying to attack a dead horse. Sorry \"#{enemy.attributes[:name]}\""
+      end
     else
-      puts "Stop trying to attack a dead horse. Sorry \"#{enemy.attributes[:name]}\""
+      puts "This #{enemy.attributes[:name]} isn't even alive..."
     end
   end
 ###########################COMBAT LOOP########################

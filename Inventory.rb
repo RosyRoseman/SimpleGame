@@ -37,7 +37,7 @@ class Inventory
   end
 
   def print_equipped
-    @equipped.each {|pair| puts "#{pair[0]}         #{pair[1]}"}
+    @equipped.each {|pair| puts "#{pair[0]}         #{pair[1].attributes[:name]}"}
     puts "*" * 80
   end
 

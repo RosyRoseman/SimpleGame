@@ -42,7 +42,7 @@ class Story
   end
 
   def self.fourohfour
-    puts "This functionality hasn't been implimented yet... Sucks dude, we know."    
+    puts "This functionality hasn't been implimented yet... Sucks dude, we know."
   end
 
 end

@@ -33,6 +33,6 @@ class Player
     puts "HP: #{@attributes[:hp]}/#{@attributes[:maxhp]}"
     puts "Your #{self.equipped[:weapon].attributes[:name]} deals #{(self.equipped[:weapon].attributes[:damage])} damage."
     puts "*" * 80
-    @inventory.print_equipped
+    @attributes[:inventory].print_equipped
   end
 end
