@@ -70,7 +70,7 @@ class Inventory
   def add(thing) #to inventory
     if thing.class.ancestors.include? Item
       item = thing.class.to_s.downcase.to_sym
-        if @inventory[input].include?(item)
+        if @inventory.include?(item)
            @inventory[item] << thing
         else
           @inventory[item] = [thing]
