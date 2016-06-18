@@ -55,9 +55,16 @@ class Room
   end
 
   def status
+    content = @attributes[:content]
     puts "You are in room number #{@attributes[:room_number]}."
     puts "You are in a #{@attributes[:adjetive]} room, that is roughly #{@attributes[:size]}."
-    puts "Inside you see a #{@attributes[:content].attributes[:name]}."
+    if Monster === content && content.alive? || Item === content
+      puts "Inside you see a #{content.attributes[:name]}."
+    elsif Monster === content && !content.alive?
+      puts "Inside you see a dead #{content.attributes[:name]}."
+    else
+      puts "Look, I'm gonna level with you here, we have no clue what this #{content} is."
+    end
   end
 
   def loot
