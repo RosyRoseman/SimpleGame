@@ -2,7 +2,8 @@ class Inventory
   attr_accessor :equipped
   def initialize
     @inventory = {bludgeon: [Bludgeon.new]}
-    @equipped  = {weapon: @inventory[:bludgeon][0]}
+    @equipped = {}
+    auto_equip(@inventory[:bludgeon].first)
   end
 
   def inventory
@@ -19,16 +20,30 @@ class Inventory
     end
   end
 
-  def equip(item)
-    if item.attributes[:equippable]
-      @equipped[item.class.to_s.downcase.to_sym] = item
+  def auto_equip(item)
+    if @equipped[item.attributes[:type]]
+      unequip(item.attributes[:type])
+    end
+    @equipped[item.attributes[:type]] = @inventory[item.class.to_s.downcase.to_sym].pop
+  end
+
+  def equip
+    puts "What would you like to equip?"
+    print_inventory
+    print_equipped
+    input = Parser.get_specific(@inventory.keys)
+    if @inventory[input] && @inventory[input].last.attributes[:equippable]
+      if @equipped[@inventory[input].first.attributes[:type]]
+        unequip(@inventory[input].last)
+      end
+      @equipped[@inventory[input].first.attributes[:type]] = @inventory[input].pop
     else
       puts "This item can't be equipped."
     end
   end
 
   def unequip(item)
-    @equipped[item.class.to_s.downcase.to_sym] = nil
+    @equipped[item.attributes[:type]] = nil
   end
 
   def print_inventory
@@ -63,7 +78,7 @@ class Inventory
     elsif @inventory[input]
       puts "This item cant be used."
     else
-      puts "cancelled"
+      puts ""
     end
   end
 

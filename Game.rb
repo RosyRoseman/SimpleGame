@@ -1,6 +1,6 @@
 require './Dependencies'
 class Game
-  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item, :take]
+  ACTIONS = [:forward, :backward, :look, :status, :attack, :inventory, :use_item, :take, :equip]
 
   def initialize
     $player = Player.new
@@ -47,6 +47,8 @@ def take_action(action) #Non-combat
     $player.attributes[:inventory].use
   when :take
     @room.loot
+  when :equip
+    $player.attributes[:inventory].equip
   end
 end
 $game = Game.new

@@ -1,7 +1,7 @@
 class Roll
 
   def self.room
-    @choice = Array.new
+    @choice = []
     Room.descendants.each do |x|
         do_times = x.commonality
         do_times.times {@choice << x}
@@ -41,7 +41,7 @@ class Roll
   def self.item
     @choice = []
     Item.descendants.each do |x|
-      if x.respond_to?(:primary)
+      if x.respond_to?(:prime)
         do_times = x.new.attributes[:commonality]
         do_times.times {@choice << x}
       end

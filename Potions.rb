@@ -26,7 +26,7 @@ class HealthPotion < Potion
     target.heal_damage(10)
     puts "#{target.attributes[:name]} is healed 10 points of damage"
   end
-  def self.primary
+  def self.prime
     TRUE
   end
 end
@@ -47,7 +47,7 @@ class FirePotion < Potion
     puts "#{target.attributes[:name]} is now on fire!"
     target.give_status_effect(:on_fire)
   end
-  def self.primary
+  def self.prime
     TRUE
   end
 end
