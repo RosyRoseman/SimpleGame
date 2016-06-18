@@ -8,7 +8,7 @@ class Game
   end
   def refresh
     @room = $player.attributes[:location]
-    $player.attributes[:inventory].refresh
+    $player.refresh
   end
   private
   def start_game

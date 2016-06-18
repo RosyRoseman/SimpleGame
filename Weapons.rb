@@ -10,7 +10,7 @@ class Bludgeon < Item
       damage:           [1,6],
       commonality:      4,
       equippable:       TRUE,
-      type:             :weapon
+      type:             :Weapon
     }
   end
   def self.prime
@@ -26,7 +26,7 @@ class ShortSword < Item
       damage:           [2,4],
       commonality:      4,
       equippable:       TRUE,
-      type:             :weapon
+      type:             :Weapon
     }
   end
   def self.prime
@@ -42,7 +42,7 @@ class Banana < Item
       damage:           [4,8],
       commonality:      2,
       equippable:       TRUE,
-      type:             :weapon
+      type:             :Weapon
     }
   end
   def self.prime
@@ -58,7 +58,7 @@ class Hatchet < Item
       damage:           [2,6],
       commonality:      4,
       equippable:       TRUE,
-      type:             :weapon
+      type:             :Weapon
     }
   end
   def self.prime

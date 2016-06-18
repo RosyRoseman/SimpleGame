@@ -7,6 +7,7 @@ class Player
     @attributes = {
                     inventory:       Inventory.new,
                     name:            "Player",
+                    baseac:          8,
                     ac:              8,
                     bab:             0,
                     maxhp:           20,
@@ -28,11 +29,28 @@ class Player
     @attributes[:inventory].equipped
   end
 
+  def refresh
+    @attributes[:inventory].refresh
+    armour_benefit
+    @attributes[:ac] = @attributes[:baseac] + @protection
+  end
+
   def status
     puts "*" * 80
     puts "HP: #{@attributes[:hp]}/#{@attributes[:maxhp]}"
-    puts "Your #{self.equipped[:weapon].attributes[:name]} deals #{(self.equipped[:weapon].attributes[:damage])} damage."
+    puts "Your #{self.equipped[:Weapon].attributes[:name]} deals #{(self.equipped[:Weapon].attributes[:damage])} damage."
     puts "*" * 80
     @attributes[:inventory].print_equipped
   end
+
+  def armour_benefit
+    total = [0]
+    @attributes[:inventory].equipped.each do |e|
+      if e[1].attributes[:protection]
+        total << e[1].attributes[:protection]
+      end
+    end
+    @protection = [total.inject(:+), 0].max
+  end
+
 end

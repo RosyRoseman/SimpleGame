@@ -47,7 +47,7 @@ class Combat
 
   def player_hits
     if Roll.to_hit?(@enemy, $player)
-       @enemy.take_damage($player.equipped[:weapon].attributes[:damage])
+       @enemy.take_damage($player.equipped[:Weapon].attributes[:damage])
      end
   end
 
