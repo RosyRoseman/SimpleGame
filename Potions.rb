@@ -17,7 +17,8 @@ class HealthPotion < Potion
   def initialize
     @attributes = {
       name:           "Health Potion",
-      commonality:    16
+      commonality:    16,
+      usable:        TRUE
     }
   end
 
@@ -35,13 +36,14 @@ class FirePotion < Potion
     @attributes = {
       name:           "Fire Potion",
       commonality:    6,
-      damage:         [1, 16]
+      damage:         [1, 16],
+      usable:         TRUE
     }
   end
 
   def give_effect(target)
-    target.take_damage(Roll.damage(@attributes[:damage]))
-    puts "***Whoosh****"
+    target.take_damage(@attributes[:damage])
+    puts "****Whoosh****"
     puts "#{target.attributes[:name]} is now on fire!"
     target.give_status_effect(:on_fire)
   end
