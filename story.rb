@@ -24,7 +24,7 @@ class Story
       sleep(1)
       text = "Do you dare enter this dungeon?".chars
       text.each {|e| print "#{e}"; sleep(0.05)}
-      sleep(1.5)
+      sleep(0.75)
       puts ""
       while true
       input = Parser.get_input([:yes, :no])
