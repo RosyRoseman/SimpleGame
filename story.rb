@@ -25,7 +25,7 @@ class Story
 =end
       system("clear")
       sleep(0.75)
-      Story.say_red("Do you dare enter this dungeon?", 0.04)
+      Story.say_red("Do you dare enter this dungeon? [y/n]", 0.04)
 #      system("say ENTER")
       sleep(0.5)
       puts ""

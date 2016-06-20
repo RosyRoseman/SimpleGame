@@ -19,8 +19,8 @@ class Game
       refresh
       action = Parser.get_input(ACTIONS)
       system("clear")
+      puts "**EXPLORING***".blue
       take_action(action)
-      refresh
     end
     puts "GAME OVER"
     exit

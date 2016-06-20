@@ -69,12 +69,12 @@ class Room
 
   def loot
     if Item === @attributes[:content] || !@attributes[:content].alive?
-      if @attributes[:loot] #|| @attributes[:content].attributes[:loot]
+      if @attributes[:loot] == :gone
+        Story.say("You have already looted this room. Stupid.")
+      elsif @attributes[:loot]
          $player.attributes[:inventory].add(@attributes[:loot])
          Story.say("You take the #{@attributes[:loot].attributes[:name]}")
          @attributes[:loot] = :gone
-      elsif @attributes[:loot] == :gone
-        Story.say("You have already looted this room. Stupid.")
       else Story.say("Error: What the Fuck?")
       end
     else

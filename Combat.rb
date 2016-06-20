@@ -15,12 +15,15 @@ class Combat
   end
 ###########################COMBAT LOOP########################
   def combat_start
+    system("clear")
+    puts "****COMBAT****".red
     effect_trigger
     Roll.initiative(@enemy)
     fight
       while @enemy.alive? && $player.alive?
         action = Parser.get_input(COMBAT_ACTIONS)
         system("clear")
+        puts "****COMBAT****".red
         take_action(action)
         effect_trigger
       end

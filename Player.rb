@@ -1,6 +1,6 @@
 class Player
   include Combatable
-  LEVEL_REQUIREMENTS  = [1, 50, 100, 200, 400, 800, 2000, 5000, 10000]
+  LEVEL_REQUIREMENTS  = [10, 50, 100, 200, 400, 800, 2000, 5000, 10000]
   attr_accessor :attributes
 
   def initialize
@@ -65,7 +65,19 @@ class Player
 
   def level_up
     @attributes[:level] += 1
+    @attributes[:maxhp] = @attributes[:maxhp] * 1.5
+    @attributes [:maxhp] = @attributes[:maxhp].round
+    @attributes[:hp] = @attributes [:maxhp]
     Story.say_blue("Congratulations or reaching level #{@attributes[:level]}!", 0.04)
+    sleep(0.5)
+    case @attributes[:level]
+    when 1
+      puts "level one"
+    when 2
+      puts "level two"
+    else
+      puts "else"
+    end
   end
 
 end

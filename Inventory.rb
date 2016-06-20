@@ -47,7 +47,7 @@ class Inventory
   end
 
   def print_inventory
-    @inventory.each {|pair| puts "#{pair[1].count} || #{pair[0].to_s}"}
+    @inventory.each {|pair| puts "#{pair[1].count} || #{pair[1].first.attributes[:name]}"}
     puts "*" * 80
   end
 
