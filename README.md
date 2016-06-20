@@ -2,6 +2,7 @@
 Text based dungeon crawler started as practice for Ruby.
 
 ## TO PLAY
+if os == osX || Linux
 Download the .zip file.
 Extract to desktop
 open Terminal or Command prompt
@@ -9,6 +10,9 @@ open Terminal or Command prompt
 type <cd Desktop>
 type <cd SimpleGame>
 type <ruby Game.rb>
+elseif os == Windows
+just download the zip and double click the .exe and you should be good
+end
 
 ## Template for adding things
 # check this before adding stuff
